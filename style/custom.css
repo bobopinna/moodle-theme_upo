@@ -1,0 +1,10 @@
+/* Custom CSS
+-------------------------*/
+.navbar a.brand {
+    background: url([[setting:logo]]) no-repeat left center;
+    background-size: auto 95%;
+}
+
+/* Custom CSS Settings
+-------------------------*/
+[[setting:customcss]]

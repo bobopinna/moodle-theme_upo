@@ -1,0 +1,191 @@
+/**
+ * Import all the rules from the parent.
+ */
+@import "../../bootstrapbase/less/moodle.less";
+
+// Set colors
+@tableBackgroundAccent: lighten(@secondaryColor, 25%);
+@tableBackgroundHover: lighten(@secondaryColor, 15%);
+@tableBorder: @secondaryColor;
+
+@formActionsBackground: @secondaryColor;
+
+@paginationActiveBackground: @secondaryColor;
+
+@hrBorder: darken(@secondaryColor, 5%);
+
+@navbarBackground: @mainColor;
+@navbarBackgroundHighlight: @navbarBackground;
+@navbarText: @mainInverseColor;
+@navbarLinkColor: @mainInverseColor;
+@navbarLinkColorHover: @mainInverseColor;
+@navbarLinkBackgroundHover: @navbarLinkBackgroundActive;
+@navbarLinkColorActive: @mainInverseColor;
+
+@dropdownLinkBackgroundHover: @navbarBackground;
+
+@footerBorderColor: @secondaryColor;
+
+@blockHeaderBorderColor: @secondaryColor;
+@blockDragTargetColor: @mainColor;
+
+
+// Style customizations
+// Remove unwanted text shadow, this can look odd with random colours.
+.breadcrumb>li,
+.nav-header {
+    text-shadow: none;
+}
+
+.breadcrumb>li {
+    display: inline;
+}
+
+// Remove roundness in menubar
+.navbar-inner {
+   .border-radius(0);
+   .box-shadow(0);
+   background-image: none;
+}
+
+#page.biglogo {
+    padding-top: 30px;
+}
+
+.navbar.biglogo .nav {
+   margin-right: 0px;
+}
+
+.navbar.biglogo .nav > li > a {
+   padding-bottom: 0px;
+   padding-top: 8px;
+}
+
+
+.navbar.biglogo .nav.pull-right{
+   margin-top: 0px;
+}
+
+.navbar.biglogo  a.brand {
+    height: 65px;
+    width: 180px;
+}
+
+.navbar a.brand {
+    color: transparent;
+    text-shadow: none;
+    height: 40px;
+    width: 110px;
+    padding: 0px;
+    margin: 0px;
+    text-indent: -9999px;
+}
+
+.navbar .logininfo a {
+    color: @navbarLinkColor;
+    font-weight: bold;
+}
+
+.navbar .btn-navbar {
+    float: left;
+}
+
+.dir-rtl .navbar a.brand {
+    float: right;
+}
+
+body:not(.jsenabled) .langmenu:hover > .dropdown-menu, .langmenu.open > .dropdown-menu {
+    max-height: none;
+    overflow-y: visible;
+}
+
+body:not(.jsenabled) .dropdown-menu {
+    top: 35px;
+    margin-top: 0px;
+}
+
+#region-bs-main-and-pre.span9 {
+    margin-left: 0px;
+}
+
+#page-footer {
+   border-top: 5px solid @footerBorderColor;
+}
+
+.block {
+   padding: 8px;
+}
+
+.block.invisible:hover {
+   opacity: 1;
+}
+
+.block .header h2 {
+   border-bottom: thin solid @blockHeaderBorderColor;
+}
+
+.hidden-blocks {
+   .alert-error;
+   margin-bottom: 10px;
+}
+
+.hidden-blocks h4 {
+   padding-bottom: 5px;
+   border-bottom: thin solid @blockHeaderBorderColor;
+}
+
+.hidden-blocks .block {
+  .fluid-span(3);
+  float: left;
+  margin-right: 10px;
+}
+
+.block-region.yui3-dd-drop {
+    border: 1px dashed @blockDragTargetColor;
+    min-height: 5em !important;
+    margin-bottom: 1em;
+}
+
+@media (max-width: 979px) {
+    .nav-collapse.active {
+        .nav  li  a {
+            color: @mainColor;
+            text-shadow: none;
+        }
+        .nav > li > a:hover,
+        .nav > li > a:focus,
+        .dropdown-menu a:hover,
+        .dropdown-menu a:focus,
+        .dropdown-submenu a:focus,
+        .dropdown-submenu a:hover,
+        .dropdown-submenu a:active,
+        .dropdown-menu > li > a:hover,
+        .dropdown-menu > li > a:focus,
+        .dropdown.open > .dropdown-toggle,
+        .dropdown-submenu.open > .dropdown-toggle,
+        {
+            color: @mainInverseColor;
+            background-color: darken(@mainColor, 5%);
+        }
+        .dropdown.open > .dropdown-menu,
+        .dropdown-submenu.open > .dropdown-menu {
+            border-left: 10px solid darken(@mainColor, 5%);
+            margin-left: 2px;
+            padding-left: 2px;
+        }
+    }
+
+    .nav-collapse.active {
+        background-color: @mainInverseColor;
+    }
+
+    .navbar .nav li.dropdown > .dropdown-toggle .caret,
+    .navbar .nav-collapse.active .nav .dropdown-submenu .dropdown-toggle::after, 
+    .navbar .nav-collapse.active .nav .dropdown-menu .dropdown-submenu .dropdown-toggle::after {
+        border-top-color: @mainColor;
+    }
+    .navbar .nav-collapse.active .nav .dropdown-submenu .dropdown-toggle:hover::after, 
+    .navbar .nav-collapse.active .nav .dropdown-menu .dropdown-submenu .dropdown-toggle:hover::after {
+        border-top-color: @mainInverseColor;
+    }
+}
