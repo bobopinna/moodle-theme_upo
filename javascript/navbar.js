@@ -1,15 +1,20 @@
 function scroll() {
     navbarcontentwidth = Y.one('.navbar .brand').get('clientWidth')+Y.one('.navbar .nav').get('clientWidth')+Y.one('.navbar .nav-collapse .nav').get('clientWidth');
 
-    if (((window.pageYOffset > yoffset) && (navbarcontentwidth < window.innerWidth)) || (window.innerWidth < 979)) {
+    if (((window.pageYOffset > yoffset) && (navbarcontentwidth < window.innerWidth)) || (window.innerWidth <= 979)) {
         navbar.removeClass('biglogo');
-        Y.one('.navbar .nav-collapse').setStyle('marginTop', '0px');
         page.removeClass('biglogo');
     } else {
         navbar.addClass('biglogo');
-        Y.one('.navbar .nav-collapse').setStyle('marginTop', '39px');
         page.addClass('biglogo');
-    } 
+    }
+
+    custommenutop = 0;
+    if (window.innerWidth > 979) {
+        navbarcontentheight = Y.one('.navbar .brand').get('clientHeight');
+        custommenutop = navbarcontentheight - Y.one('.navbar .nav-collapse').get('clientHeight');
+    }
+    Y.one('.navbar .nav-collapse').setStyle('marginTop', custommenutop+'px');
 }
 
 var navbar = Y.one('.navbar');

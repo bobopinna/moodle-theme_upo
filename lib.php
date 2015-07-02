@@ -120,15 +120,17 @@ function theme_upo_get_html_for_settings(renderer_base $output, moodle_page $pag
         $return->navbarclass .= ' navbar-inverse';
     }
 
+    $site = get_site();
     if (!empty($page->theme->settings->logo)) {
-        $return->heading = html_writer::link($CFG->wwwroot, '', array('title' => get_string('home'), 'class' => 'logo'));
+        $logo = $page->theme->setting_file_url('logo', 'logo');
+        $return->heading = html_writer::empty_tag('img', array('src' => $logo, 'alt' => $site->fullname));
     } else {
-        $return->heading = $output->page_heading();
+        $return->heading = html_writer::tag('h1', $site->fullname);
     }
 
     $return->footnote = '';
     if (!empty($page->theme->settings->footnote)) {
-        $return->footnote = '<div class="footnote text-center">'.$page->theme->settings->footnote.'</div>';
+        $return->footnote = html_writer::tag('div', $page->theme->settings->footnote, array('class' => 'footnote text-center'));
     }
 
     return $return;
@@ -145,10 +147,6 @@ function theme_upo_get_html_for_settings(renderer_base $output, moodle_page $pag
  */
 function theme_upo_process_css($css, $theme) {
 
-    // Set the background image for the logo.
-    $logo = $theme->setting_file_url('logo', 'logo');
-    $css = theme_upo_set_logo($css, $logo);
-
     $css = theme_upo_set_fontwww($css);
 
     // Set custom CSS.
@@ -158,25 +156,6 @@ function theme_upo_process_css($css, $theme) {
         $customcss = null;
     }
     $css = theme_upo_set_customcss($css, $customcss);
-
-    return $css;
-}
-
-/**
- * Adds the logo to CSS.
- *
- * @param string $css The CSS.
- * @param string $logo The URL of the logo.
- * @return string The parsed CSS
- */
-function theme_upo_set_logo($css, $logo) {
-    $tag = '[[setting:logo]]';
-    $replacement = $logo;
-    if (is_null($replacement)) {
-        $replacement = '';
-    }
-
-    $css = str_replace($tag, $replacement, $css);
 
     return $css;
 }

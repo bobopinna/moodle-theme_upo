@@ -27,7 +27,6 @@
 
 // Get the HTML for the settings bits.
 $html = theme_upo_get_html_for_settings($OUTPUT, $PAGE);
-
 if (right_to_left()) {
     $regionbsid = 'region-bs-main-and-post';
 } else {
@@ -50,12 +49,13 @@ echo $OUTPUT->doctype() ?>
 <header role="banner" class="navbar navbar-fixed-top<?php echo $html->navbarclass ?> moodle-has-zindex">
     <nav role="navigation" class="navbar-inner">
         <div class="container-fluid">
-            <a class="brand" href="<?php echo $CFG->wwwroot;?>"><?php echo $SITE->fullname; ?></a>
+            <a class="brand" href="<?php echo $CFG->wwwroot;?>"><?php echo $html->heading; ?></a>
             <a class="btn btn-navbar" data-toggle="workaround-collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
+            <a class="logoupo pull-right" href="http://www.uniupo.it"><img src="<?php echo $OUTPUT->pix_url('upo', 'theme'); ?>" alt="Universit&agrave; del Piemonte Orientale" /></a>
             <div class="nav nav-collapse collapse pull-right">
                 <?php echo $OUTPUT->custom_menu(); ?>
             </div>
@@ -65,7 +65,6 @@ echo $OUTPUT->doctype() ?>
 
 <div id="page" class="container-fluid">
     <header id="page-header" class="clearfix">
-        <?php echo $html->heading; ?>
         <div id="page-navbar" class="clearfix">
             <nav class="breadcrumb-nav"><?php echo $OUTPUT->navbar(); ?></nav>
             <div class="breadcrumb-button"><?php echo $OUTPUT->page_heading_menu().$OUTPUT->page_heading_button(); ?></div>

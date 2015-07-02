@@ -52,42 +52,60 @@
     padding-top: 30px;
 }
 
-.navbar.biglogo .nav {
-   margin-right: 0px;
+.navbar.biglogo {
+    .nav {
+        margin-right: 0;
+    }
+
+    .nav > li > a {
+        padding-bottom: 0;
+        padding-top: 8px;
+    }
+
+    .nav.pull-right{
+        margin-top: 0;
+    }
+
+    a.brand,
+    a.logoupo {
+        img {
+           height: 4.5em;
+        }
+
+        h1 {
+             font-size: 32px;
+             margin: .4em 0;
+       }
+    }
 }
 
-.navbar.biglogo .nav > li > a {
-   padding-bottom: 0px;
-   padding-top: 8px;
-}
+.navbar {
+     a.brand,
+     a.logoupo {
+         font-size: 14px;
+         display: inline-block;
+         text-shadow: none;
+         padding: 0;
+         margin: 0;
+  
+         img {
+             height: 3em;
+         }
+ 
+         h1 {
+             font-size: 30px;
+             margin: .1em 0;
+         }
+     }
 
+     logininfo a {
+         color: @navbarLinkColor;
+         font-weight: bold;
+     }
 
-.navbar.biglogo .nav.pull-right{
-   margin-top: 0px;
-}
-
-.navbar.biglogo  a.brand {
-    height: 65px;
-    width: 180px;
-}
-
-.navbar a.brand {
-    color: transparent;
-    text-shadow: none;
-    height: 40px;
-    width: 110px;
-    padding: 0px;
-    margin: 0px;
-    text-indent: -9999px;
-}
-
-.navbar .logininfo a {
-    color: @navbarLinkColor;
-    font-weight: bold;
-}
-
-.navbar .btn-navbar {
-    float: left;
+     .btn-navbar {
+         float: left;
+     }
 }
 
 .dir-rtl .navbar a.brand {
@@ -101,11 +119,11 @@ body:not(.jsenabled) .langmenu:hover > .dropdown-menu, .langmenu.open > .dropdow
 
 body:not(.jsenabled) .dropdown-menu {
     top: 35px;
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 #region-bs-main-and-pre.span9 {
-    margin-left: 0px;
+    margin-left: 0;
 }
 
 #page-footer {
@@ -127,17 +145,17 @@ body:not(.jsenabled) .dropdown-menu {
 .hidden-blocks {
    .alert-error;
    margin-bottom: 10px;
-}
 
-.hidden-blocks h4 {
-   padding-bottom: 5px;
-   border-bottom: thin solid @blockHeaderBorderColor;
-}
+   h4 {
+       padding-bottom: 5px;
+       border-bottom: thin solid @blockHeaderBorderColor;
+   }
 
-.hidden-blocks .block {
-  .fluid-span(3);
-  float: left;
-  margin-right: 10px;
+   .block {
+       .fluid-span(3);
+       float: left;
+       margin-right: 10px;
+   }
 }
 
 .block-region.yui3-dd-drop {
@@ -148,10 +166,13 @@ body:not(.jsenabled) .dropdown-menu {
 
 @media (max-width: 979px) {
     .nav-collapse.active {
+        background-color: @mainInverseColor;
+
         .nav  li  a {
             color: @mainColor;
             text-shadow: none;
         }
+
         .nav > li > a:hover,
         .nav > li > a:focus,
         .dropdown-menu a:hover,
@@ -162,21 +183,17 @@ body:not(.jsenabled) .dropdown-menu {
         .dropdown-menu > li > a:hover,
         .dropdown-menu > li > a:focus,
         .dropdown.open > .dropdown-toggle,
-        .dropdown-submenu.open > .dropdown-toggle,
-        {
+        .dropdown-submenu.open > .dropdown-toggle {
             color: @mainInverseColor;
             background-color: darken(@mainColor, 5%);
         }
+
         .dropdown.open > .dropdown-menu,
         .dropdown-submenu.open > .dropdown-menu {
             border-left: 10px solid darken(@mainColor, 5%);
             margin-left: 2px;
             padding-left: 2px;
         }
-    }
-
-    .nav-collapse.active {
-        background-color: @mainInverseColor;
     }
 
     .navbar .nav li.dropdown > .dropdown-toggle .caret,
