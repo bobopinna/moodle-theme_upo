@@ -54,50 +54,58 @@
         * functionality to the custommenu.
         */
         $hasdisplaymydashboard = (empty($this->page->theme->settings->displaymydashboard)) ? false : $this->page->theme->settings->displaymydashboard;
-        if (isloggedin() && !isguestuser() && $hasdisplaymydashboard) {
-            $branchtitle = fullname($USER);
-            //$branchlabel = $OUTPUT->pix_icon('i/user', '', 'moodle', array('class' => 'smallicon pluginicon noicon')).' '.$branchtitle;
-            $branchurl   = new moodle_url('/my/index.php');
-            $branchsort  = 10002;
- 
-            $branch = $menu->add($branchtitle, $branchurl, $branchtitle, $branchsort);
-            $itemtitle = get_string('profile');
-            //$itemlabel = $OUTPUT->pix_icon('i/user', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
-            $branch->add($itemtitle, new moodle_url('/user/profile.php'), get_string('profile'));
-
-            $itemtitle = get_string('pluginname', 'block_calendar_month');
-            //$itemlabel = $OUTPUT->pix_icon('i/calendar', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
-            $branch->add($itemtitle, new moodle_url('/calendar/view.php'), get_string('pluginname', 'block_calendar_month'));
-
-            // Check if messaging is enabled.
-            if (!empty($CFG->messaging)) {
-                $itemtitle = get_string('pluginname', 'block_messages');
-                //$itemlabel = $OUTPUT->pix_icon('t/email', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
-                $branch->add($itemtitle, new moodle_url('/message/index.php'), get_string('pluginname', 'block_messages'));
+        if (isloggedin() && !isguestuser()) {
+            if ($hasdisplaymydashboard) {
+                $branchtitle = fullname($USER);
+                //$branchlabel = $OUTPUT->pix_icon('i/user', '', 'moodle', array('class' => 'smallicon pluginicon noicon')).' '.$branchtitle;
+                $branchurl   = new moodle_url('/my/index.php');
+                $branchsort  = 10002;
+     
+                $branch = $menu->add($branchtitle, $branchurl, $branchtitle, $branchsort);
+                $itemtitle = get_string('profile');
+                //$itemlabel = $OUTPUT->pix_icon('i/user', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
+                $branch->add($itemtitle, new moodle_url('/user/profile.php'), get_string('profile'));
+    
+                $itemtitle = get_string('pluginname', 'block_calendar_month');
+                //$itemlabel = $OUTPUT->pix_icon('i/calendar', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
+                $branch->add($itemtitle, new moodle_url('/calendar/view.php'), get_string('pluginname', 'block_calendar_month'));
+    
+                // Check if messaging is enabled.
+                if (!empty($CFG->messaging)) {
+                    $itemtitle = get_string('pluginname', 'block_messages');
+                    //$itemlabel = $OUTPUT->pix_icon('t/email', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
+                    $branch->add($itemtitle, new moodle_url('/message/index.php'), get_string('pluginname', 'block_messages'));
+                }
+    
+                // Check if badges are enabled.
+                if (!empty($CFG->enablebadges)) {
+                    $itemtitle = get_string('badges');
+                    //$itemlabel = $OUTPUT->pix_icon('i/badge', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
+                    $branch->add($itemtitle, new moodle_url('/badges/mybadges.php'), get_string('badges'));
+                }
+    
+                $itemtitle = get_string('privatefiles', 'block_private_files'); 
+                //$itemlabel = $OUTPUT->pix_icon('i/folder', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
+                $branch->add($itemtitle, new moodle_url('/user/files.php'), get_string('privatefiles', 'block_private_files'));
+    
+                $itemtitle = get_string('forumposts', 'mod_forum'); 
+                //$itemlabel = $OUTPUT->pix_icon('t/message', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
+                $branch->add($itemtitle, new moodle_url('/mod/forum/user.php?id='.$USER->id));
+    
+                $itemtitle = get_string('discussion', 'mod_forum'); 
+                //$itemlabel = $OUTPUT->pix_icon('t/messages', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
+                $branch->add($itemtitle, new moodle_url('/mod/forum/user.php?id='.$USER->id.'&mode=discussions'));
+    
+                $itemtitle = get_string('logout'); 
+                //$itemlabel = $OUTPUT->pix_icon('i/export', '', 'moodle', array('class' => 'smallicon pluginicon noicon rotate-90'));
+                $branch->add($itemtitle, new moodle_url('/login/logout.php'), get_string('logout'));    
+            } else {
+                $branchtitle = get_string('logout');
+                //$branchlabel = $OUTPUT->pix_icon('i/export', '', 'moodle', array('class' => 'smallicon pluginicon noicon rotate-90'));
+                $branchurl   = new moodle_url('/login/logout.php');
+                $branchsort  = 10002;
+                $branch = $menu->add($branchtitle, $branchurl, $branchtitle, $branchsort);
             }
-
-            // Check if badges are enabled.
-            if (!empty($CFG->enablebadges)) {
-                $itemtitle = get_string('badges');
-                //$itemlabel = $OUTPUT->pix_icon('i/badge', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
-                $branch->add($itemtitle, new moodle_url('/badges/mybadges.php'), get_string('badges'));
-            }
-
-            $itemtitle = get_string('privatefiles', 'block_private_files'); 
-            //$itemlabel = $OUTPUT->pix_icon('i/folder', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
-            $branch->add($itemtitle, new moodle_url('/user/files.php'), get_string('privatefiles', 'block_private_files'));
-
-            $itemtitle = get_string('forumposts', 'mod_forum'); 
-            //$itemlabel = $OUTPUT->pix_icon('t/message', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
-            $branch->add($itemtitle, new moodle_url('/mod/forum/user.php?id='.$USER->id));
-
-            $itemtitle = get_string('discussion', 'mod_forum'); 
-            //$itemlabel = $OUTPUT->pix_icon('t/messages', '', 'moodle', array('class' => 'smallicon pluginicon noicon'));
-            $branch->add($itemtitle, new moodle_url('/mod/forum/user.php?id='.$USER->id.'&mode=discussions'));
-
-            $itemtitle = get_string('logout'); 
-            //$itemlabel = $OUTPUT->pix_icon('i/export', '', 'moodle', array('class' => 'smallicon pluginicon noicon rotate-90'));
-            $branch->add($itemtitle, new moodle_url('/login/logout.php'), get_string('logout'));    
         } else {
             $branchtitle = get_string('login');
             //$branchlabel = $OUTPUT->pix_icon('i/user', '', 'moodle', array('class' => 'smallicon pluginicon noicon')).' '.$branchtitle;
