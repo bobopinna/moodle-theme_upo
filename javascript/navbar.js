@@ -1,7 +1,10 @@
 function scroll() {
-    navbarcontentwidth = Y.one('.navbar .brand').get('clientWidth')+Y.one('.navbar .nav').get('clientWidth')+Y.one('.navbar .nav-collapse .nav').get('clientWidth');
+    navbarcontentwidth = Y.one('.navbar .brand').get('clientWidth')
+                        +Y.one('.navbar .nav-collapse .nav').get('clientWidth')
+                        +Y.one('.navbar .logoupo').get('clientWidth');
+    bodywidth = Y.one('body').get('clientWidth');
 
-    if (((window.pageYOffset > yoffset) && (navbarcontentwidth < window.innerWidth)) || (window.innerWidth <= 979)) {
+    if (((window.pageYOffset > yoffset) || (navbarcontentwidth > bodywidth)) || (bodywidth <= 979)) {
         navbar.removeClass('biglogo');
         page.removeClass('biglogo');
     } else {
@@ -10,7 +13,7 @@ function scroll() {
     }
 
     custommenutop = 0;
-    if (window.innerWidth > 979) {
+    if (bodywidth > 979) {
         navbarcontentheight = Y.one('.navbar .brand').get('clientHeight');
         custommenutop = navbarcontentheight - Y.one('.navbar .nav-collapse').get('clientHeight');
     }

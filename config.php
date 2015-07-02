@@ -26,9 +26,13 @@ $THEME->name = 'upo';
 $THEME->parents = array('clean', 'bootstrapbase');
 
 $THEME->doctype = 'html5';
+
+$THEME->javascript_footer = array('navbar');
+
 $ieproperties = core_useragent::check_ie_properties();
 if (($ieproperties === false || $ieproperties['version'] > 8) && ($THEME->settings->awesomefont != '0')) {
     $THEME->sheets = array('font-awesome', 'icons', 'custom');
+    $THEME->javascript_footer[] = 'icons';
 } else {
     $THEME->sheets = array('custom');
 }

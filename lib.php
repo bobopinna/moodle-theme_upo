@@ -219,16 +219,3 @@ function theme_upo_set_customcss($css, $customcss) {
 
     return $css;
 }
-
-function theme_upo_page_init(moodle_page $page) { 
-    global $CFG;
-
-    $url = new moodle_url($CFG->wwwroot.'/theme/upo/javascript/navbar.js');
-    $page->requires->js($url);
-
-    $theme = theme_config::load('upo');
-    if ($theme->settings->awesomefont != '0') {
-        $url = new moodle_url($CFG->wwwroot.'/theme/upo/javascript/icons.js.php');
-        $page->requires->js($url);
-    }
-}
