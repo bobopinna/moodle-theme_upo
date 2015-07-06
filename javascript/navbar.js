@@ -7,7 +7,6 @@ function upo_navbar_update() {
     bodywidth = Y.one('body').get('clientWidth');
 
     biglogo = true;
-    custommenutop = 0;
 
     // Is scroll position near page top?
     if (window.pageYOffset > yoffset) {
@@ -24,9 +23,6 @@ function upo_navbar_update() {
     navbarcontentwidth += parseInt(Y.one('.navbar .container-fluid').getComputedStyle('margin-right'));
     if (navbarbutton.getComputedStyle('display') == 'none') {
         navbarcontentwidth += Y.one('.navbar .nav-collapse .nav').get('clientWidth');
-        // Calculate the right top margin for custom menus
-        navbarcontentheight = Y.one('.navbar .brand').get('clientHeight');
-        custommenutop = navbarcontentheight - Y.one('.navbar .nav-collapse').get('clientHeight');
     } else {
         navbarcontentwidth += navbarbutton.get('clientWidth');
         // Small screen > Small logos
@@ -50,6 +46,12 @@ function upo_navbar_update() {
     }
 
     // Set top margin for custom menus
+    custommenutop = 0;
+    if (navbarbutton.getComputedStyle('display') == 'none') {
+        // Calculate the right top margin for custom menus
+        navbarcontentheight = Y.one('.navbar .brand').get('clientHeight');
+        custommenutop = navbarcontentheight - Y.one('.navbar .nav-collapse').get('clientHeight');
+    }
     Y.one('.navbar .nav-collapse').setStyle('marginTop', custommenutop+'px');
 }
 
