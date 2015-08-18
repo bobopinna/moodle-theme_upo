@@ -50,9 +50,9 @@ function upo_navbar_update() {
     if (navbarbutton.getComputedStyle('display') == 'none') {
         // Calculate the right top margin for custom menus
         navbarcontentheight = Y.one('.navbar .brand').get('clientHeight');
-        custommenutop = navbarcontentheight - Y.one('.navbar .nav-collapse').get('clientHeight');
+        custommenutop = navbarcontentheight - Y.one('.usermenu').get('clientHeight');
     }
-    Y.one('.navbar .nav-collapse').setStyle('marginTop', custommenutop+'px');
+    Y.one('.menubar').setStyle('marginTop', custommenutop+'px');
 }
 
 var oldbodywidth = Y.one('body').get('clientWidth');
