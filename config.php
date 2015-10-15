@@ -64,7 +64,7 @@ $THEME->layouts = array(
     'course' => array(
         'file' => 'columns3.php',
         'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-pre',
+        'defaultregion' => 'side-post',
         'options' => array('langmenu' => true),
     ),
     'coursecategory' => array(
@@ -81,7 +81,7 @@ $THEME->layouts = array(
     // The site home page.
     'frontpage' => array(
         'file' => 'frontpage.php',
-        'regions' => array('banner', 'home-left', 'home-middle', 'home-right', 'side-pre', 'side-post', 'hidden-dock', 'footer-left', 'footer-middle', 'footer-right'),
+        'regions' => array('banner', 'banner-right', 'home-left', 'home-middle', 'home-right', 'side-pre', 'side-post', 'hidden-dock', 'footer-left', 'footer-middle', 'footer-right'),
         'defaultregion' => 'hidden-dock',
         'options' => array('nonavbar' => true),
     ),
