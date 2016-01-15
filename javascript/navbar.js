@@ -18,7 +18,7 @@ function upo_navbar_update() {
     navbarcontentwidth += parseInt(Y.one('.navbar .container-fluid').getComputedStyle('margin-left'));
     navbarcontentwidth += parseInt(Y.one('.navbar .container-fluid').getComputedStyle('padding-left'));
     navbarcontentwidth += Y.one('.navbar .brand').get('clientWidth');
-    navbarcontentwidth += Y.one('.navbar .logoupo').get('clientWidth');
+//    navbarcontentwidth += Y.one('.navbar .logoupo').get('clientWidth');
     navbarcontentwidth += parseInt(Y.one('.navbar .container-fluid').getComputedStyle('padding-right'));
     navbarcontentwidth += parseInt(Y.one('.navbar .container-fluid').getComputedStyle('margin-right'));
     if (navbarbutton.getComputedStyle('display') == 'none') {

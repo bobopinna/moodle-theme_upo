@@ -55,7 +55,6 @@ echo $OUTPUT->doctype() ?>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="logoupo pull-right" href="http://www.uniupo.it"><img src="<?php echo $OUTPUT->pix_url('upo', 'theme'); ?>" alt="Universit&agrave; del Piemonte Orientale" /></a>
             <div class="menubar">
                 <?php echo $OUTPUT->user_menu(); ?>
                 <div class="custommenu nav nav-collapse collapse">

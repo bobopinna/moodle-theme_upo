@@ -63,11 +63,6 @@ $string['contentbackground_desc'] = 'The background colour of the main content o
 $string['customcss'] = 'Custom CSS';
 $string['customcssdesc'] = 'Whatever CSS rules you add to this textarea will be reflected in every page, making for easier customization of this theme.';
 
-$string['displaymydashboard'] = 'Show My home menu';
-$string['displaymydashboard_desc'] = 'Show My home menu in custom menu bar';
-$string['displaymycourses'] = 'Show courses menu';
-$string['displaymycourses_desc'] = 'Show courses menu in custom menu bar';
-
 $string['footerbackground'] = 'Footer background colour';
 $string['footerbackground_desc'] = 'The background colour of the footer of the site, leave empty for none.';
 $string['footercolor'] = 'Footer text colour';

@@ -58,7 +58,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_upo/bodybackground';
     $title = get_string('bodybackground', 'theme_upo');
     $description = get_string('bodybackground_desc', 'theme_upo');
-    $default = '#FFFFFF';
+    $default = '#CCCCCC';
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, null, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
@@ -132,6 +132,7 @@ if ($ADMIN->fulltree) {
     //$default = '#D1232A'; // Pantone 484 Grabbed
     //$default = '#CE181E'; // Pantone 484 Ufficio Comunicazione
     $default = '#9B301C'; // Pantone 484 Ufficio Comunicazione
+    $default = '#D4341D'; //Definitivo utilizzato sul www.dir.uniupo.it
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, null, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
@@ -191,24 +192,6 @@ if ($ADMIN->fulltree) {
     $description = get_string('customcssdesc', 'theme_upo');
     $default = '';
     $setting = new admin_setting_configtextarea($name, $title, $description, $default);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-
-    // Toggle dashboard display in custommenu.
-    $name = 'theme_upo/displaymydashboard';
-    $title = get_string('displaymydashboard', 'theme_upo');
-    $description = get_string('displaymydashboard_desc', 'theme_upo');
-    $default = true;
-    $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $settings->add($setting);
-    
-    // Toggle courses display in custommenu.
-    $name = 'theme_upo/displaymycourses';
-    $title = get_string('displaymycourses', 'theme_upo');
-    $description = get_string('displaymycourses_desc', 'theme_upo');
-    $default = true;
-    $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
 

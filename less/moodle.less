@@ -119,8 +119,7 @@ small {
         margin-top: 0;
     }
 
-    a.brand,
-    a.logoupo {
+    a.brand {
         img {
            height: 4.5em;
         }
@@ -133,8 +132,7 @@ small {
 }
 
 .navbar {
-     a.brand,
-     a.logoupo {
+     a.brand {
          font-size: 1em;
          display: inline-block;
          text-shadow: none;
@@ -183,6 +181,25 @@ body:not(.jsenabled) .dropdown-menu {
 
 #page-footer {
    border-top: 5px solid @footerBorderColor;
+   display: table;
+   width: 100%;
+   table-layout: fixed;
+}
+
+#page-footer > * {
+   display: table-cell;
+   vertical-align: middle;
+   text-align: center;
+}
+
+#page-footer > :first-child,
+#page-footer > :first-child * {
+   text-align: left;
+}
+
+#page-footer > :last-child,
+#page-footer > :last-child * {
+   text-align: right;
 }
 
 .block {
