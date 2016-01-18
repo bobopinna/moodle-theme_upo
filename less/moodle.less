@@ -240,6 +240,35 @@ body:not(.jsenabled) .dropdown-menu {
     font-size: 1.2em;
 }
 
+.shibbolethauthlink {
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    min-width: 185px;
+    color: white;
+    background-color: #1d8c23;
+    text-align: left;
+    padding: 7px;
+ }
+ 
+ .shibbolethauthlink:before {
+     width: 24px;
+     height: 24px;
+     content: "";
+     display: inline-block;
+     background: url([[pix:theme|upo-white]]) no-repeat 50% 50%;
+     background-color: rgba(0, 0, 0, 0.15);
+     background-size: 90%;
+     margin: -7px 10px -14px -7px;
+     padding: 7px;
+ }
+ 
+ .shibbolethauthlink:hover {
+    text-decoration: none;
+     background-color: #186617;
+     color: white;
+ }
+
 @media (max-width: 979px) {
     .nav-collapse {
         background-color: @mainInverseColor;
