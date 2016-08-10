@@ -202,6 +202,16 @@ body:not(.jsenabled) .dropdown-menu {
    text-align: right;
 }
 
+.flex-blocks,
+.flex-blocks .row-fluid,
+.flex-blocks .block-region {
+   display: flex;
+
+   .block {
+      width: 100%;
+   }
+}
+
 .block {
    padding: 8px;
 }
@@ -309,5 +319,15 @@ body:not(.jsenabled) .dropdown-menu {
     .navbar .nav-collapse.active .nav .dropdown-submenu .dropdown-toggle:hover::after,
     .navbar .nav-collapse.active .nav .dropdown-menu .dropdown-submenu .dropdown-toggle:hover::after {
         border-top-color: @mainInverseColor;
+    }
+
+    .flex-blocks,
+    .flex-blocks .row-fluid,
+    .flex-blocks .block-region {
+        display: block;
+
+       .block {
+          width: auto;
+       }   
     }
 }

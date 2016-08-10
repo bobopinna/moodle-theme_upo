@@ -27,38 +27,11 @@
  include('includes/header.php');
 ?>
     <div id="page-content" class="row-fluid">
-        <div class="row-fluid">
-<?php
-    $banner = $OUTPUT->upoblocks(array('banner'), array('banner-blocks', 'span8'));
-    $bannerside = $OUTPUT->upoblocks(array('banner-right'), array('banner-blocks', 'span4'));
-
-    if (empty($bannerside)) {
-        $banner = $OUTPUT->upoblocks(array('banner'), array('banner-blocks', 'span12'));
-    }
-    if (empty($banner)) {
-        $bannerside = $OUTPUT->upoblocks(array('banner-right'), array('banner-blocks', 'span12'));
-    }
-?>
-            <?php echo $banner; ?>
-            <?php echo $bannerside; ?>
-        </div>
-        <?php echo $OUTPUT->upoblocks(array('home-left', 'home-middle', 'home-right'), array('home-blocks', 'row-fluid')); ?>
-        <div id="<?php echo $regionbsid ?>" class="span9">
-            <div class="row-fluid">
-                <section id="region-main" class="span8 pull-right">
-                    <?php
-                    echo $OUTPUT->course_content_header();
-                    echo $OUTPUT->main_content();
-                    echo $OUTPUT->course_content_footer();
-                    ?>
-                </section>
-                <?php echo $OUTPUT->blocks('side-pre', 'span4 desktop-first-column'); ?>
-            </div>
-        </div>
-        <?php echo $OUTPUT->blocks('side-post', 'span3'); ?>
+        <?php echo $OUTPUT->upoblocks(array('home-left', 'home-middle', 'home-right'), array('home-blocks', 'row-fluid', 'flex-blocks')); ?>
+        <?php echo $OUTPUT->upoblocks(array('banner'), array('banner-blocks', 'row-fluid', 'flex-box')); ?>
+        <?php echo $OUTPUT->upoblocks(array('footer-left', 'footer-middle', 'footer-right'), array('footer-blocks', 'row-fluid', 'flex-blocks')); ?>
+        <?php echo $OUTPUT->main_content(); ?>
     </div>
-
-    <?php echo $OUTPUT->upoblocks(array('footer-left', 'footer-middle', 'footer-right'), array('footer-blocks', 'row-fluid')); ?>
     <?php 
         if (is_siteadmin()) { 
             echo $OUTPUT->upoblocks(array('hidden-dock'), array('hidden-blocks', 'container-fluid'), get_string('visibleadminonly', 'theme_upo'));
