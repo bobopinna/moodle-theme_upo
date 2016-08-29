@@ -49,7 +49,8 @@ if ($ADMIN->fulltree) {
     $title = get_string('linkcolor', 'theme_upo');
     $description = get_string('linkcolor_desc', 'theme_upo');
     //$default = '#A91E23'; // Rosso scuro sito
-    $default = '#CE181E'; // Pantone 484
+    //$default = '#CE181E'; // Pantone 484
+    $default = '#0070A8'; // Blue Moodle Site
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, null, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
@@ -58,7 +59,8 @@ if ($ADMIN->fulltree) {
     $name = 'theme_upo/bodybackground';
     $title = get_string('bodybackground', 'theme_upo');
     $description = get_string('bodybackground_desc', 'theme_upo');
-    $default = '#CCCCCC';
+    //$default = '#CCCCCC';
+    $default = '#FFFFFF';
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, null, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
@@ -131,8 +133,9 @@ if ($ADMIN->fulltree) {
     $description = get_string('maincolor_desc', 'theme_upo');
     //$default = '#D1232A'; // Pantone 484 Grabbed
     //$default = '#CE181E'; // Pantone 484 Ufficio Comunicazione
-    $default = '#9B301C'; // Pantone 484 Ufficio Comunicazione
-    $default = '#D4341D'; //Definitivo utilizzato sul www.dir.uniupo.it
+    //$default = '#9B301C'; // Pantone 484 Ufficio Comunicazione
+    //$default = '#D4341D'; // Definitivo utilizzato sul www.dir.uniupo.it
+    $default = '#000000'; // Nero
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, null, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
@@ -150,7 +153,8 @@ if ($ADMIN->fulltree) {
     $name = 'theme_upo/secondarycolor';
     $title = get_string('secondarycolor', 'theme_upo');
     $description = get_string('secondarycolor_desc', 'theme_upo');
-    $default = '#8A8A8D'; // Pantone Cool Gray 8
+    //$default = '#8A8A8D'; // Pantone Cool Gray 8
+    $default = '#CCCCCC'; // Light Gray
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, null, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
@@ -159,7 +163,8 @@ if ($ADMIN->fulltree) {
     $name = 'theme_upo/secondaryinversecolor';
     $title = get_string('secondaryinversecolor', 'theme_upo');
     $description = get_string('secondaryinversecolor_desc', 'theme_upo');
-    $default = '#FFFFFF';
+    //$default = '#FFFFFF';
+    $default = '#000000';
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default, null, false);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
