@@ -83,6 +83,9 @@ function theme_upo_less_variables($theme) {
     if (!empty($theme->settings->linkcolor)) {
         $variables['linkColor'] = $theme->settings->linkcolor;
     }
+    if (!empty($theme->settings->contentbackground)) {
+        $variables['contentBackground'] = $theme->settings->contentbackground;
+    }
     if (!empty($theme->settings->maincolor)) {
         $variables['mainColor'] = $theme->settings->maincolor;
     }
