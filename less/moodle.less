@@ -11,6 +11,7 @@
 @formActionsBackground: @secondaryColor;
 
 @paginationActiveBackground: @secondaryColor;
+@blockBackgroundColor: @contentBackground;
 
 @hrBorder: darken(@secondaryColor, 5%);
 
@@ -24,7 +25,10 @@
 
 @dropdownLinkBackgroundHover: @navbarBackground;
 
-@footerBorderColor: @secondaryColor;
+@footerBorder: @secondaryColor;
+@footerBackground: @mainColor;
+@footerText: @mainInverseColor;
+@footerLinkColor: @mainInverseColor;
 
 @blockHeaderBorderColor: @secondaryColor;
 @blockDragTargetColor: @mainColor;
@@ -101,13 +105,13 @@ small {
 
 // Remove roundness in menubar
 .navbar-inner {
-   .border-radius(0);
-   .box-shadow(0);
+   .border-radius(0px);
+   .box-shadow(none);
    background-image: none;
 }
 
 #page.biglogo {
-    padding-top: 30px;
+    padding-top: 20px;
 }
 
 .navbar.biglogo {
@@ -120,8 +124,9 @@ small {
     }
 
     a.brand {
+        height: 4.5em;
         img {
-           height: 4.5em;
+           height: 4.1em;
         }
 
         h1 {
@@ -179,11 +184,29 @@ body:not(.jsenabled) .dropdown-menu {
     margin-left: 0;
 }
 
+#region-main {
+   .border-radius(0px);
+   .box-shadow(none) !important;
+   border: none !important;
+}
+
 #page-footer {
-   border-top: 5px solid @footerBorderColor;
+   border-top: 5px solid @footerBorder;
+   background-color: @footerBackground;
+   color: @footerText;
    display: table;
    width: 100%;
    table-layout: fixed;
+
+   a {
+       color: @footerLinkColor;
+       &:active {
+           color: darken(@footerLinkColor, 15%);
+       }
+       &:hover {
+           color: darken(@footerLinkColor, 15%);
+       }
+   }
 }
 
 #page-footer > * {
@@ -192,14 +215,37 @@ body:not(.jsenabled) .dropdown-menu {
    text-align: center;
 }
 
-#page-footer > :first-child,
-#page-footer > :first-child * {
+#page-footer > :first-child {
+   padding-left: 20px;
    text-align: left;
+  
+   & * {
+      text-align: left;
+   }
 }
 
-#page-footer > :last-child,
-#page-footer > :last-child * {
-   text-align: right;
+#page-footer > :last-child {
+    padding-right: 20px;
+    text-align: right;
+
+    & * {
+        text-align: right;
+    }
+}
+
+#dirlinks {
+   background-color: @footerBackground;
+   color: @footerText;
+
+   a {
+       color: @footerLinkColor;
+       &:active {
+           color: darken(@footerLinkColor, 15%);
+       }
+       &:hover {
+           color: darken(@footerLinkColor, 15%);
+       }
+   }
 }
 
 .flex-blocks,
@@ -213,30 +259,54 @@ body:not(.jsenabled) .dropdown-menu {
 }
 
 .block {
-   padding: 8px;
+   background-color: @blockBackgroundColor;
+   .border-radius(0px);
+   .box-shadow(none);
+   border: none;
+
+   .header h2 {
+       border-top: thin solid @blockHeaderBorderColor;
+       padding-top: 10px;
+       border-bottom: thin solid @blockHeaderBorderColor;
+    }
 }
 
 .block.invisible:hover {
    opacity: 1;
 }
 
-.block .header h2 {
-   border-bottom: thin solid @blockHeaderBorderColor;
+
+.banner-blocks .block {
+   padding: 0;
+   background: none;
+   border: none;
+   .box-shadow(none);
+   margin-bottom: 0;
+
+   .content {
+       padding: 0;
+   }
 }
 
 .hidden-blocks {
-   .alert-error;
+   border: 2px solid  #f2dede;
    margin-bottom: 10px;
 
    h4 {
-       padding-bottom: 5px;
+       background-color: #f2dede;
+       padding: 1em 5px;
        border-bottom: thin solid @blockHeaderBorderColor;
+       margin: 0;
    }
 
-   .block {
-       .fluid-span(3);
-       float: left;
-       margin-right: 10px;
+   .block-region {
+       padding: 4px;
+
+       .block {
+           .fluid-span(3);
+           float: left;
+           padding: 4px;
+       }
    }
 }
 
@@ -250,10 +320,51 @@ body:not(.jsenabled) .dropdown-menu {
     font-size: 1.2em;
 }
 
+.makeFluidCol(@span:1,@offset:0) {
+    float: left;
+    #grid > .fluid .span(@span);
+    #grid > .fluid .offset(@offset);
+    &:first-child {
+        margin-left: 0;
+        .offsetFirstChild(@offset);
+    }
+}
+
+#page-site-index.pagelayout-frontpage .banner-blocks .block_rss_client {
+    .border-radius(0);
+    margin-top: 20px;
+    background-color: @secondaryColor;
+    padding: 20px 1em;
+
+    div.header {
+        .makeFluidCol(2);
+
+        .block_action {
+            display: none;
+        }
+        h2 {
+            color: @secondaryInverseColor;
+        }
+    }
+
+    div.content {
+        ul {
+            li {
+                float: left;
+                width: 17.8%;
+                #grid > .fluid .offset(0);
+                padding-left: 0;
+                padding-right: 0;
+                border: none;
+            }
+        }
+    }
+}
+
 .shibbolethauthlink {
     display: inline-block;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
+    .border-radius(3px);
     min-width: 185px;
     color: white;
     background-color: #1d8c23;
@@ -280,6 +391,10 @@ body:not(.jsenabled) .dropdown-menu {
  }
 
 @media (max-width: 979px) {
+    .navbar-fixed-top {
+        margin-bottom: 0px;
+    }
+
     .nav-collapse {
         background-color: @mainInverseColor;
 
@@ -330,4 +445,51 @@ body:not(.jsenabled) .dropdown-menu {
           width: auto;
        }   
     }
+
+    #page-site-index.pagelayout-frontpage .banner-blocks .block_rss_client {
+        div.header {
+            float: none;
+            width: auto; 
+            h2 {
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        div.content {
+            ul {
+                li {
+                    float: none;
+                    width: auto; 
+                    padding-left: 5px;
+                    padding-right: 5px;
+                }
+            }
+        }
+    }
+
+   .hidden-blocks .block-region .block {
+       .fluid-span(6);
+   }
+}
+
+@media (max-width: 767px) {
+    body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
+        margin: 0;
+    }
+
+    #page {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+   .hidden-blocks .block-region .block {
+       float: none;
+       width: auto;
+   }
 }

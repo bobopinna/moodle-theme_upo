@@ -28,15 +28,24 @@
 ?>
     <div id="page-content" class="row-fluid">
         <?php echo $OUTPUT->upoblocks(array('home-left', 'home-middle', 'home-right'), array('home-blocks', 'row-fluid', 'flex-blocks')); ?>
-        <?php echo $OUTPUT->upoblocks(array('banner'), array('banner-blocks', 'row-fluid', 'flex-box')); ?>
-        <?php echo $OUTPUT->upoblocks(array('footer-left', 'footer-middle', 'footer-right'), array('footer-blocks', 'row-fluid', 'flex-blocks')); ?>
-        <?php echo $OUTPUT->main_content(); ?>
+        <section>
+            <div id="region-main">
+                <?php
+                    echo $OUTPUT->course_content_header();
+                    echo $OUTPUT->main_content();
+                    echo $OUTPUT->course_content_footer();
+                ?>
+            </div>
+            <?php echo $OUTPUT->blocks('side-post', 'span4'); ?>
+        </section>
     </div>
+
     <?php 
         if (is_siteadmin()) { 
-            echo $OUTPUT->upoblocks(array('hidden-dock'), array('hidden-blocks', 'container-fluid'), get_string('visibleadminonly', 'theme_upo'));
+            echo $OUTPUT->upoblocks(array('hidden-dock'), array('hidden-blocks', 'row-fluid'), get_string('visibleadminonly', 'theme_upo'));
         }
      ?>
+    <?php echo $OUTPUT->upoblocks(array('footer-left', 'footer-middle', 'footer-right'), array('footer-blocks', 'row-fluid', 'flex-blocks')); ?>
 
 <?php
  include('includes/footer.php');

@@ -64,7 +64,9 @@ echo $OUTPUT->doctype() ?>
         </div>
     </nav>
 </header>
-
+<?php
+ echo $OUTPUT->upoblocks(array('banner'), array('banner-blocks'));
+?>
 <div id="page" class="container-fluid">
     <header id="page-header" class="clearfix">
         <div id="page-navbar" class="clearfix">
