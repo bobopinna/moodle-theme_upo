@@ -30,15 +30,17 @@
 </div> <!-- page -->
 
     <footer id="page-footer">
-        <div id="logoupo"><a href="http://www.uniupo.it"><img src="<?php echo $OUTPUT->pix_url('upo-red', 'theme'); ?>" alt="Universit&agrave; del Piemonte Orientale" /></a></div>
-        <?php echo $OUTPUT->login_info(); ?>
-        <div class="">
-            <?php echo $OUTPUT->home_link(); ?>
-            <?php echo $OUTPUT->page_doc_link(); ?>
-            <?php echo $OUTPUT->standard_footer_html(); ?>
+        <div class="footer-row">
+            <div id="logoupo"><a href="http://www.uniupo.it"><img src="<?php echo $OUTPUT->pix_url('upo-red', 'theme'); ?>" alt="Universit&agrave; del Piemonte Orientale" /></a></div>
+            <?php echo $OUTPUT->login_info(); ?>
+            <div class="">
+                <?php echo $OUTPUT->home_link(); ?>
+                <?php echo $OUTPUT->page_doc_link(); ?>
+                <?php echo $OUTPUT->standard_footer_html(); ?>
+            </div>
         </div>
+        <?php echo $html->footnote; ?>
+        <?php echo $OUTPUT->standard_end_of_body_html(); ?>
     </footer>
-    <?php echo $html->footnote; ?>
-    <?php echo $OUTPUT->standard_end_of_body_html(); ?>
 </body>
 </html>

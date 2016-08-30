@@ -33,8 +33,14 @@
 @blockHeaderBorderColor: @secondaryColor;
 @blockDragTargetColor: @mainColor;
 
+@pageMaxWidth: 1720px;
+
 
 // Style customizations
+body {
+    background-color: @mainColor;
+}
+
 h1, h2, h3, h4, h5, h6 {
     line-height: normal;
 }
@@ -110,8 +116,9 @@ small {
    background-image: none;
 }
 
-#page.biglogo {
-    padding-top: 20px;
+#page {
+    padding-top: 1em;
+    background-color: @contentBackground;
 }
 
 .navbar.biglogo {
@@ -137,7 +144,10 @@ small {
 }
 
 .navbar {
-     a.brand {
+    opacity: 0.8;
+    filter: alpha(opacity=8);
+
+    a.brand {
          font-size: 1em;
          display: inline-block;
          text-shadow: none;
@@ -191,61 +201,54 @@ body:not(.jsenabled) .dropdown-menu {
 }
 
 #page-footer {
-   border-top: 5px solid @footerBorder;
-   background-color: @footerBackground;
-   color: @footerText;
-   display: table;
-   width: 100%;
-   table-layout: fixed;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
 
-   a {
-       color: @footerLinkColor;
-       &:active {
-           color: darken(@footerLinkColor, 15%);
-       }
-       &:hover {
-           color: darken(@footerLinkColor, 15%);
-       }
-   }
-}
+    max-width: @pageMaxWidth;
+    background-color: @footerBackground;
+    color: @footerText;
+    border-top: 0;
+    margin: 0 auto;
 
-#page-footer > * {
-   display: table-cell;
-   vertical-align: middle;
-   text-align: center;
-}
-
-#page-footer > :first-child {
-   padding-left: 20px;
-   text-align: left;
-  
-   & * {
-      text-align: left;
-   }
-}
-
-#page-footer > :last-child {
-    padding-right: 20px;
-    text-align: right;
-
-    & * {
-        text-align: right;
+    a {
+        color: @footerLinkColor;
+        &:active {
+            color: darken(@footerLinkColor, 15%);
+        }
+        &:hover {
+            color: darken(@footerLinkColor, 15%);
+        }
     }
-}
 
-#dirlinks {
-   background-color: @footerBackground;
-   color: @footerText;
+    .footer-row {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    
+        &> * {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+        }
 
-   a {
-       color: @footerLinkColor;
-       &:active {
-           color: darken(@footerLinkColor, 15%);
-       }
-       &:hover {
-           color: darken(@footerLinkColor, 15%);
-       }
-   }
+        &> :first-child {
+            padding-left: 20px;
+            text-align: left;
+
+            & * {
+               text-align: left;
+            }
+        }
+
+        &> :last-child {
+            padding-right: 20px;
+            text-align: right;
+
+            & * {
+                text-align: right;
+            }
+        }
+    }
 }
 
 .flex-blocks,
@@ -330,35 +333,53 @@ body:not(.jsenabled) .dropdown-menu {
     }
 }
 
-#page-site-index.pagelayout-frontpage .banner-blocks .block_rss_client {
-    .border-radius(0);
-    margin-top: 20px;
-    background-color: @secondaryColor;
-    padding: 20px 1em;
+#page-site-index.pagelayout-frontpage .banner-blocks {
+    max-width: @pageMaxWidth;
+    margin: 0 auto;
 
-    div.header {
-        .makeFluidCol(2);
-
-        .block_action {
-            display: none;
-        }
-        h2 {
-            color: @secondaryInverseColor;
+    .block_slideshow {
+        div.content {
+            max-width: @pageMaxWidth;
         }
     }
 
-    div.content {
-        ul {
-            li {
-                float: left;
-                width: 17.8%;
-                #grid > .fluid .offset(0);
-                padding-left: 0;
-                padding-right: 0;
-                border: none;
+    .block_rss_client {
+       .border-radius(0);
+//        margin-top: 20px;
+        background-color: @secondaryColor;
+        padding: 20px 1em;
+    
+        div.header {
+            .makeFluidCol(2);
+    
+            .block_action {
+                display: none;
+            }
+            h2 {
+                color: @secondaryInverseColor;
+            }
+        }
+    
+        div.content {
+            ul {
+                li {
+                    float: left;
+                    width: 17.8%;
+                    #grid > .fluid .offset(0);
+                    padding-left: 0;
+                    padding-right: 0;
+                    border: none;
+                }
             }
         }
     }
+}
+
+.singleselect select {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 60vw;
+    max-width: @pageMaxWidth*60/10r;
 }
 
 .shibbolethauthlink {
