@@ -177,6 +177,33 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $settings->add($setting);
 
+    // Footer Logo file setting.
+    $name = 'theme_upo/footerlogo';
+    $title = get_string('footerlogo','theme_upo');
+    $description = get_string('footerlogodesc', 'theme_upo');
+    $setting = new admin_setting_configstoredfile($name, $title, $description, 'footerlogo');
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $settings->add($setting);
+
+    // Footer Logo alt.
+    $name = 'theme_upo/footerlogoalt';
+    $title = get_string('footerlogoalt', 'theme_upo');
+    $description = get_string('footerlogoaltdesc', 'theme_upo');
+    $default = '';
+    $setting = new admin_setting_configtext($name, $title, $description, $default);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $settings->add($setting);
+
+    // Footer Logo link.
+    $name = 'theme_upo/footerlogolink';
+    $title = get_string('footerlogolink', 'theme_upo');
+    $description = get_string('footerlogolinkdesc', 'theme_upo');
+    $default = '';
+    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_URL);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $settings->add($setting);
+
+
     // Include Awesome Font from Bootstrapcdn
     $name = 'theme_upo/awesomefont';
     $title = get_string('awesomefont', 'theme_upo');

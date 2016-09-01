@@ -81,6 +81,14 @@ $string['logo'] = 'Logo';
 $string['logodesc'] = 'Please upload your custom logo here if you want to add it to the header.<br>
 If the height of your logo is more than 75px add the following CSS rule to the Custom CSS box below.<br>
 a.logo {height: 100px;} or whatever height in pixels the logo is.';
+$string['footerlogo'] = 'Footer logo';
+$string['footerlogodesc'] = 'Please upload your custom logo here if you want to add it to the footer.<br>
+If the height of your logo is more than 75px add the following CSS rule to the Custom CSS box below.<br>
+a.footerlogo {height: 100px;} or whatever height in pixels the logo is.';
+$string['footerlogoalt'] = 'Footer alternative text';
+$string['footerlogoaltdesc'] = 'Please provide an alternative text here if you want to add it to the footer as logo alternative text o just as a text.';
+$string['footerlogolink'] = 'Footer logo link url';
+$string['footerlogolinkdesc'] = 'Footer logo link url.';
 
 $string['maincolor'] = 'Main colour';
 $string['maincolor_desc'] = 'The main colour of the page. Used for menubar.';

@@ -131,6 +131,21 @@ function theme_upo_get_html_for_settings(renderer_base $output, moodle_page $pag
         $return->heading = html_writer::tag('h1', $site->fullname);
     }
 
+    $footerlogoalt = '&nbsp;';
+    if (!empty($page->theme->settings->footerlogoalt)) {
+        $footerlogoalt = format_string($page->theme->settings->footerlogoalt);
+    }
+
+    if (!empty($page->theme->settings->footerlogo)) {
+        $footerlogo = $page->theme->setting_file_url('footerlogo', 'footerlogo');
+        $return->logofoot = html_writer::empty_tag('img', array('src' => $footerlogo, 'alt' => $footerlogoalt));
+        if (!empty($page->theme->settings->footerlogolink)) {
+            $return->logofoot = html_writer::tag('a', $return->logofoot, array('href' => $page->theme->settings->footerlogolink, 'title' => $footerlogoalt));
+        }
+    } else {
+        $return->logofoot = html_writer::tag('h3', $footerlogoalt);
+    }
+
     $return->footnote = '';
     if (!empty($page->theme->settings->footnote)) {
         $return->footnote = html_writer::tag('div', $page->theme->settings->footnote, array('class' => 'footnote text-center'));
@@ -176,7 +191,7 @@ function theme_upo_process_css($css, $theme) {
  * @return bool
  */
 function theme_upo_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
-    if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'backgroundimage')) {
+    if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'footerlogo' || $filearea === 'backgroundimage')) {
         $theme = theme_config::load('upo');
         return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
     } else {

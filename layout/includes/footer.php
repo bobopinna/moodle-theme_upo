@@ -31,7 +31,7 @@
 
     <footer id="page-footer">
         <div class="footer-row">
-            <div id="logoupo"><a href="http://www.uniupo.it"><img src="<?php echo $OUTPUT->pix_url('upo-red', 'theme'); ?>" alt="Universit&agrave; del Piemonte Orientale" /></a></div>
+            <div id="logofooter"><?php echo $html->logofoot; ?></div>
             <?php echo $OUTPUT->login_info(); ?>
             <div class="">
                 <?php echo $OUTPUT->home_link(); ?>

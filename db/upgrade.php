@@ -73,5 +73,9 @@ function xmldb_theme_upo_upgrade($oldversion) {
     // Moodle v2.7.0 release upgrade line.
     // Put any upgrade step following this.
 
+    if ($oldversion < 2016090100) {
+        upgrade_plugin_savepoint(true, 2016090100, 'theme', 'upo');
+    }
+
     return true;
 }

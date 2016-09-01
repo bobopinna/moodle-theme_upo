@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2014051200;
+$plugin->version   = 2016090100;
 $plugin->requires  = 2014050800;
 $plugin->component = 'theme_upo';
 $plugin->dependencies = array(
