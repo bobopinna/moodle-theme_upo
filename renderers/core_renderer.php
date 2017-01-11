@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
  
- class theme_upo_core_renderer extends theme_bootstrapbase_core_renderer {
+ class theme_upo_core_renderer extends theme_clean_core_renderer {
 
    /*
     * This code replaces the icons with
@@ -118,5 +118,6 @@
         $content = html_writer::tag('span', $title, array());
         return html_writer::tag('a', $content, array('href' => $url, 'class' => 'btn '.$btn, 'title' => $title));
     }
+
 }
 
