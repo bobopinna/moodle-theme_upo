@@ -74,8 +74,8 @@ $THEME->layouts = array(
     ),
     // Part of course, typical for modules - default page layout if $cm specified in require_login().
     'incourse' => array(
-        'file' => 'columns3.php',
-        'regions' => array('side-pre', 'side-post'),
+        'file' => 'columns2.php',
+        'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
     // The site home page.
