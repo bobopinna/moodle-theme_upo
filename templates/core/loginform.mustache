@@ -55,13 +55,7 @@
         <h2>{{#str}} login {{/str}}</h2>
 
         <div class="subcontent loginsub">
-            {{#error}}
-                <div class="loginerrors" role="alert">
-                    <a href="#" id="loginerrormessage" class="accesshide">{{error}}</a>
-                    {{{errorformatted}}}
-                </div>
-            {{/error}}
-        {{#hasidentityproviders}}
+            {{#hasidentityproviders}}
                  <div class="subcontent potentialidps">
                     <!--h6>{{#str}} potentialidps, auth {{/str}}</h6-->
                     <div class="potentialidplist">
@@ -77,8 +71,14 @@
                         {{/identityproviders}}
                     </div>
                 </div>
-        {{/hasidentityproviders}}
+            {{/hasidentityproviders}}
             <form action="{{loginurl}}" method="post" id="login">
+            {{#error}}
+                <div class="loginerrors" role="alert">
+                    <a href="#" id="loginerrormessage" class="accesshide">{{error}}</a>
+                    {{{errorformatted}}}
+                </div>
+            {{/error}}
                 <div class="loginform">
                     <div class="form-label">
                         <label for="username">
