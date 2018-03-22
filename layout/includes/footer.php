@@ -32,7 +32,7 @@
     <footer id="page-footer">
         <div class="footer-row">
             <div id="logofooter"><?php echo $html->logofoot; ?></div>
-            <?php echo $OUTPUT->login_info(); ?>
+            <div><?php echo $OUTPUT->standard_end_of_body_html(); ?></div>
             <div class="">
                 <?php echo $OUTPUT->home_link(); ?>
                 <?php echo $OUTPUT->page_doc_link(); ?>
@@ -40,7 +40,6 @@
             </div>
         </div>
         <?php echo $html->footnote; ?>
-        <?php echo $OUTPUT->standard_end_of_body_html(); ?>
     </footer>
 </body>
 </html>

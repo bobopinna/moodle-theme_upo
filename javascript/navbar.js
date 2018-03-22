@@ -57,7 +57,7 @@ function upo_navbar_update() {
 
 var oldbodywidth = Y.one('body').get('clientWidth');
 
-window.onscroll = upo_navbar_update;
-window.onresize = upo_navbar_update;
+//window.onscroll = upo_navbar_update;
+//window.onresize = upo_navbar_update;
 
-upo_navbar_update();
+//upo_navbar_update();
