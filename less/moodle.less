@@ -39,6 +39,7 @@
 // Style customizations
 body {
     background-color: @bodyBackground;
+    padding-top: 3.1em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -388,7 +389,7 @@ body:not(.jsenabled) .dropdown-menu {
     display: inline-block;
     border: 1px solid rgba(0, 0, 0, 0.1);
     .border-radius(3px);
-    min-width: 185px;
+    min-width: 230px;
     color: white;
     background-color: #1d8c23;
     text-align: left;
@@ -411,6 +412,59 @@ body:not(.jsenabled) .dropdown-menu {
     text-decoration: none;
      background-color: #186617;
      color: white;
+ }
+
+.standardauthlink {
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    /*min-width: 185px;*/
+    min-width: 230px;
+    color: white;
+    background-color: #f79c3f;
+    text-align: left;
+    padding: 7px;
+ }
+
+ .standardauthlink:before {
+     width: 24px;
+     height: 24px;
+     content: "";
+     display: inline-block;
+     background: url([[pix:theme|moodle-white]]) no-repeat 50% 50%;
+     background-color: rgba(0, 0, 0, 0.15);
+     background-size: 90%;
+     margin: -7px 10px -14px -7px;
+     padding: 7px;
+ }
+
+ .standardauthlink:hover {
+    text-decoration: none;
+    background-color: #f07c28;
+    color: white;
+ }
+
+ .potentialidp .btn {
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    .border-radius(3px);
+    background-color: #fff;
+    background-image: none;
+    min-width: 230px;
+    text-align: left;
+    padding: 7px;
+ }
+
+ .potentialidp .btn img {
+    margin-right: .8em;
+ }
+
+ .loginpanel {
+    text-align: center;
+ }
+
+ .loginbox .subcontent {
+    padding: 0;
  }
 
 @media (max-width: 979px) {
