@@ -15,38 +15,54 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Moodle's UPO theme
- *
- * For full information about creating Moodle themes, see:
- * http://docs.moodle.org/dev/Themes_2.0
+ * The columns layout for the upo theme.
  *
  * @package   theme_upo
- * @copyright 2014 Roberto Pinna
+ * @copyright 2019 Roberto Pinna
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- include('includes/header.php');
-?>
-    <div id="page-content" class="row-fluid">
-        <?php echo $OUTPUT->upoblocks(array('home-left', 'home-middle', 'home-right'), array('home-blocks', 'row-fluid', 'flex-blocks')); ?>
-        <section>
-            <div id="region-main">
-                <?php
-                    echo $OUTPUT->course_content_header();
-                    echo $OUTPUT->main_content();
-                    echo $OUTPUT->course_content_footer();
-                ?>
-            </div>
-            <?php echo $OUTPUT->blocks('side-post', 'span4'); ?>
-        </section>
-    </div>
 
-    <?php 
-        if (is_siteadmin()) { 
-            echo $OUTPUT->upoblocks(array('hidden-dock'), array('hidden-blocks', 'row-fluid'), get_string('visibleadminonly', 'theme_upo'));
-        }
-     ?>
-    <?php echo $OUTPUT->upoblocks(array('footer-left', 'footer-middle', 'footer-right'), array('footer-blocks', 'row-fluid', 'flex-blocks')); ?>
+defined('MOODLE_INTERNAL') || die();
 
-<?php
- include('includes/footer.php');
-?>
+$bodyattributes = $OUTPUT->body_attributes();
+$blocksbanner = $OUTPUT->upoblocks(array('banner'), array('banner-blocks'));
+$blockshome = $OUTPUT->upoblocks(array('home-left', 'home-middle', 'home-right'), array('home-blocks'));
+$blockspre = $OUTPUT->blocks('side-pre');
+$blockspost = $OUTPUT->blocks('side-post');
+
+$stradminonly = get_string('adminonly', 'theme_upo');
+$hiddendock = $OUTPUT->upoblocks(array('hidden-dock'), array('hidden-blocks'), $stradminonly);
+$blocksfooter = $OUTPUT->upoblocks(array('footer-left', 'footer-middle', 'footer-right'),
+                                   array('footer-blocks'));
+
+$hasbanner = $PAGE->blocks->region_has_content('banner', $OUTPUT) || $PAGE->user_is_editing();
+$hashomeblock = $PAGE->blocks->region_has_content('home-left', $OUTPUT) || $PAGE->user_is_editing();
+$hashomeblock = $hashomeblock || $PAGE->blocks->region_has_content('home-middle', $OUTPUT);
+$hashomeblock = $hashomeblock || $PAGE->blocks->region_has_content('home-right', $OUTPUT);
+$hassidepre = $PAGE->blocks->region_has_content('side-pre', $OUTPUT) || $PAGE->user_is_editing();
+$hassidepost = $PAGE->blocks->region_has_content('side-post', $OUTPUT) || $PAGE->user_is_editing();
+$hashiddendock = is_siteadmin() && ($PAGE->blocks->region_has_content('hidden-dock', $OUTPUT) || $PAGE->user_is_editing());
+$hasfooterblock = $PAGE->blocks->region_has_content('footer-left', $OUTPUT) || $PAGE->user_is_editing();
+$hasfooterblock = $hasfooterblock || $PAGE->blocks->region_has_content('footer-middle', $OUTPUT);
+$hasfooterblock = $hasfooterblock || $PAGE->blocks->region_has_content('footer-right', $OUTPUT);
+
+$templatecontext = [
+    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
+    'output' => $OUTPUT,
+    'bannerblocks' => $blocksbanner,
+    'homeblocks' => $blockshome,
+    'sidepreblocks' => $blockspre,
+    'sidepostblocks' => $blockspost,
+    'hiddendock' => $hiddendock,
+    'footerblocks' => $blocksfooter,
+    'hasbannerblocks' => $hasbanner,
+    'hashomeblocks' => $hashomeblock,
+    'haspreblocks' => $hassidepre,
+    'haspostblocks' => $hassidepost,
+    'hashiddendock' => $hashiddendock,
+    'hasfooterblocks' => $hasfooterblock,
+    'bodyattributes' => $bodyattributes
+];
+
+echo $OUTPUT->render_from_template('theme_upo/frontpage', $templatecontext);
+

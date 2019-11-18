@@ -15,17 +15,34 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Classic theme.
+ * Privacy Subsystem implementation for theme_upo.
  *
- * @package    theme_upo
- * @copyright  2019 Roberto Pinna
+ * @package   theme_upo
+ * @copyright 2018 Bas Brands
+ * @copyright 2019 Roberto Pinna
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// This line protects the file from being accessed by a URL directly.
+namespace theme_upo\privacy;
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2019052001;
-$plugin->requires = 2019051100;
-$plugin->component = 'theme_upo';
-$plugin->dependencies = array('theme_classic' => 2019051100);
+/**
+ * The upo theme does not store any data.
+ *
+ * @copyright 2018 Bas Brands
+ * @copyright 2019 Roberto Pinna
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}

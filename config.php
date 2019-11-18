@@ -15,115 +15,109 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme UPO config file.
+ * upo theme config.
  *
- * @package    theme_upo
- * @copyright  2014 Roberto Pinna
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_upo
+ * @copyright 2018 Bas Brands
+ * @copyright 2019 Roberto Pinna
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// This line protects the file from being accessed by a URL directly.
+defined('MOODLE_INTERNAL') || die();
+
 $THEME->name = 'upo';
-$THEME->parents = array('clean', 'bootstrapbase');
 
-$THEME->doctype = 'html5';
+$THEME->sheets = [];
 
-$THEME->javascripts_footer = array('navbar');
-
-$ieproperties = core_useragent::check_ie_properties();
-if (($ieproperties === false || $ieproperties['version'] > 8) && ($THEME->settings->awesomefont != '0')) {
-    $THEME->sheets = array('font-awesome', 'icons', 'custom');
-    $THEME->javascripts_footer[] = 'icons';
-} else {
-    $THEME->sheets = array('custom');
-}
-$THEME->lessfile = 'moodle';
-$THEME->parents_exclude_sheets = array('bootstrapbase' => array('moodle'), 'clean' => array('custom'));
-$THEME->lessvariablescallback = 'theme_upo_less_variables';
-$THEME->extralesscallback = 'theme_upo_extra_less';
-$THEME->supportscssoptimisation = false;
-$THEME->yuicssmodules = array();
-$THEME->enable_dock = true;
-$THEME->editor_sheets = array();
-
-$THEME->rendererfactory = 'theme_overridden_renderer_factory';
-$THEME->csspostprocess = 'theme_upo_process_css';
-
-$THEME->layouts = array(
+$THEME->layouts = [
     // Most backwards compatible layout without the blocks - this is the layout used by default.
     'base' => array(
-        'file' => 'columns1.php',
+        'theme' => 'classic',
+        'file' => 'columns.php',
         'regions' => array(),
     ),
     // Standard layout with blocks, this is recommended for most pages with general information.
     'standard' => array(
-        'file' => 'columns3.php',
+        'theme' => 'classic',
+        'file' => 'columns.php',
         'regions' => array('side-pre', 'side-post'),
         'defaultregion' => 'side-pre',
     ),
     // Main course page.
     'course' => array(
-        'file' => 'columns3.php',
+        'theme' => 'classic',
+        'file' => 'columns.php',
         'regions' => array('side-pre', 'side-post'),
-        'defaultregion' => 'side-post',
+        'defaultregion' => 'side-pre',
         'options' => array('langmenu' => true),
     ),
     'coursecategory' => array(
-        'file' => 'columns3.php',
-        'regions' => array('side-pre', 'side-post'),
+        'theme' => 'classic',
+        'file' => 'columns.php',
+        'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
     // Part of course, typical for modules - default page layout if $cm specified in require_login().
     'incourse' => array(
-        'file' => 'columns2.php',
+        'theme' => 'classic',
+        'file' => 'columns.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
     // The site home page.
     'frontpage' => array(
         'file' => 'frontpage.php',
-        'regions' => array('banner', 'home-left', 'home-middle', 'home-right', 'side-post', 'hidden-dock', 'footer-left', 'footer-middle', 'footer-right'),
+        'regions' => array('banner', 'home-left', 'home-middle', 'home-right','side-pre', 'side-post', 'hidden-dock', 'footer-left', 'footer-middle', 'footer-right'),
         'defaultregion' => 'hidden-dock',
-        'options' => array('nonavbar' => true),
+        'options' => array('nofullheader' => true),
     ),
     // Server administration scripts.
     'admin' => array(
-        'file' => 'columns2.php',
+        'theme' => 'classic',
+        'file' => 'columns.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
     // My dashboard page.
     'mydashboard' => array(
-        'file' => 'columns3.php',
+        'theme' => 'classic',
+        'file' => 'columns.php',
         'regions' => array('side-pre', 'side-post'),
         'defaultregion' => 'side-pre',
-        'options' => array('langmenu' => true),
+        'options' => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
     ),
     // My public page.
     'mypublic' => array(
-        'file' => 'columns3.php',
-        'regions' => array('side-pre', 'side-post'),
+        'theme' => 'classic',
+        'file' => 'columns.php',
+        'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
     'login' => array(
-        'file' => 'columns1.php',
+        'theme' => 'boost',
+        'file' => 'login.php',
         'regions' => array(),
         'options' => array('langmenu' => true),
     ),
 
     // Pages that appear in pop-up windows - no navigation, no blocks, no header.
     'popup' => array(
-        'file' => 'popup.php',
+        'theme' => 'classic',
+        'file' => 'contentonly.php',
         'regions' => array(),
         'options' => array('nofooter' => true, 'nonavbar' => true),
     ),
     // No blocks and minimal footer - used for legacy frame layouts only!
     'frametop' => array(
-        'file' => 'columns1.php',
+        'theme' => 'classic',
+        'file' => 'contentonly.php',
         'regions' => array(),
         'options' => array('nofooter' => true, 'nocoursefooter' => true),
     ),
     // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible.
     'embedded' => array(
+        'theme' => 'boost',
         'file' => 'embedded.php',
         'regions' => array()
     ),
@@ -131,35 +125,48 @@ $THEME->layouts = array(
     // This must not have any blocks, links, or API calls that would lead to database or cache interaction.
     // Please be extremely careful if you are modifying this layout.
     'maintenance' => array(
+        'theme' => 'boost',
         'file' => 'maintenance.php',
         'regions' => array(),
     ),
     // Should display the content and basic headers only.
     'print' => array(
-        'file' => 'columns1.php',
+        'theme' => 'classic',
+        'file' => 'contentonly.php',
         'regions' => array(),
         'options' => array('nofooter' => true, 'nonavbar' => false),
     ),
     // The pagelayout used when a redirection is occuring.
     'redirect' => array(
+        'theme' => 'boost',
         'file' => 'embedded.php',
         'regions' => array(),
     ),
     // The pagelayout used for reports.
     'report' => array(
-        'file' => 'columns2.php',
+        'theme' => 'classic',
+        'file' => 'columns.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
     // The pagelayout used for safebrowser and securewindow.
     'secure' => array(
+        'theme' => 'classic',
         'file' => 'secure.php',
-        'regions' => array('side-pre', 'side-post'),
+        'regions' => array('side-pre'),
         'defaultregion' => 'side-pre'
-    ),
-);
+    )
+];
 
-$THEME->blockrtlmanipulations = array(
-    'side-pre' => 'side-post',
-    'side-post' => 'side-pre'
-);
+$THEME->editor_sheets = [];
+$THEME->parents = ['boost', 'classic'];
+$THEME->enable_dock = false;
+$THEME->extrascsscallback = 'theme_upo_get_extra_scss';
+$THEME->prescsscallback = 'theme_upo_get_pre_scss';
+$THEME->precompiledcsscallback = 'theme_upo_get_precompiled_css';
+$THEME->yuicssmodules = array();
+$THEME->rendererfactory = 'theme_overridden_renderer_factory';
+$THEME->scss = function($theme) {
+    return theme_upo_get_main_scss_content($theme);
+};
+$THEME->usefallback = true;

@@ -15,167 +15,115 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme UPO lib.
+ * Classic theme callbacks.
  *
  * @package    theme_upo
- * @copyright  2014 Frédéric Massart
+ * @copyright  2018 Bas Brands
+ * @copyright  2019 Roberto Pinna
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// This line protects the file from being accessed by a URL directly.
+defined('MOODLE_INTERNAL') || die();
+
 /**
- * Extra LESS code to inject.
- *
- * This will generate some LESS code from the settings used by the user. We cannot use
- * the {@link theme_upo_less_variables()} here because we need to create selectors or
- * alter existing ones.
+ * Returns the main SCSS content.
  *
  * @param theme_config $theme The theme config object.
- * @return string Raw LESS code.
+ * @return string
  */
-function theme_upo_extra_less($theme) {
-    $content = '';
-    $imageurl = $theme->setting_file_url('backgroundimage', 'backgroundimage');
-    // Sets the background image, and its settings.
-    if (!empty($imageurl)) {
-        $content .= 'body { ';
-        $content .= "background-image: url('$imageurl');";
-        if (!empty($theme->settings->backgroundfixed)) {
-            $content .= 'background-attachment: fixed;';
-        }
-        if (!empty($theme->settings->backgroundposition)) {
-            $content .= 'background-position: ' . str_replace('_', ' ', $theme->settings->backgroundposition) . ';';
-        }
-        if (!empty($theme->settings->backgroundrepeat)) {
-            $content .= 'background-repeat: ' . $theme->settings->backgroundrepeat . ';';
-        }
-        $content .= ' }';
+function theme_upo_get_main_scss_content($theme) {
+    global $CFG;
+
+    $scss = '';
+    $filename = !empty($theme->settings->preset) ? $theme->settings->preset : null;
+    $fs = get_file_storage();
+
+    $context = context_system::instance();
+    $scss .= file_get_contents($CFG->dirroot . '/theme/upo/scss/upo/pre.scss');
+    if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_upo', 'preset', 0, '/', $filename))) {
+        $scss .= $presetfile->get_content();
+    } else {
+        // Safety fallback - maybe new installs etc.
+        $scss .= file_get_contents($CFG->dirroot . '/theme/upo/scss/preset/default.scss');
     }
-    // If there the user wants a background for the content, we need to make it look consistent,
-    // therefore we need to round its borders, and adapt the border colour.
-    if (!empty($theme->settings->contentbackground)) {
-        $content .= '
-            #region-main {
-                .well;
-                background-color: ' . $theme->settings->contentbackground . ';
-                border-color: darken(' . $theme->settings->contentbackground . ', 7%);
-            }';
+    $scss .= file_get_contents($CFG->dirroot . '/theme/upo/scss/upo/post.scss');
+
+    return $scss;
+}
+
+/**
+ * Get SCSS to prepend.
+ *
+ * @param theme_config $theme The theme config object.
+ * @return array
+ */
+function theme_upo_get_pre_scss($theme) {
+    $scss = '';
+    $configurable = [
+        // Config key => [variableName, ...].
+        'brandcolor' => ['primary'],
+        'linkcolor' => ['link-color'],
+    ];
+
+    // Prepend variables first.
+    foreach ($configurable as $configkey => $targets) {
+        $value = isset($theme->settings->{$configkey}) ? $theme->settings->{$configkey} : null;
+        if (empty($value)) {
+            continue;
+        }
+        array_map(function($target) use (&$scss, $value) {
+            $scss .= '$' . $target . ': ' . $value . ";\n";
+        }, (array) $targets);
+    }
+
+    // Prepend pre-scss.
+    if (!empty($theme->settings->scsspre)) {
+        $scss .= $theme->settings->scsspre;
+    }
+
+    return $scss;
+}
+
+/**
+ * Inject additional SCSS.
+ *
+ * @param theme_config $theme The theme config object.
+ * @return string
+ */
+function theme_upo_get_extra_scss($theme) {
+    global $CFG;
+    $content = '';
+
+    // Set the page background image.
+    $imageurl = $theme->setting_file_url('backgroundimage', 'backgroundimage');
+    if (!empty($imageurl)) {
+        $content .= '$imageurl: "' . $imageurl . '";';
+        $content .= file_get_contents($CFG->dirroot .
+            '/theme/upo/scss/upo/body-background.scss');
+    }
+
+    if (!empty($theme->settings->navbardark)) {
+        $content .= file_get_contents($CFG->dirroot .
+            '/theme/upo/scss/upo/navbar-dark.scss');
+    } else {
+        $content .= file_get_contents($CFG->dirroot .
+            '/theme/upo/scss/upo/navbar-light.scss');
+    }
+    if (!empty($theme->settings->scss)) {
+        $content .= $theme->settings->scss;
     }
     return $content;
 }
 
 /**
- * Returns variables for LESS.
+ * Get compiled css.
  *
- * We will inject some LESS variables from the settings that the user has defined
- * for the theme. No need to write some custom LESS for this.
- *
- * @param theme_config $theme The theme config object.
- * @return array of LESS variables without the @.
+ * @return string compiled css
  */
-function theme_upo_less_variables($theme) {
-    $variables = array();
-    if (!empty($theme->settings->bodybackground)) {
-        $variables['bodyBackground'] = $theme->settings->bodybackground;
-    }
-    if (!empty($theme->settings->textcolor)) {
-        $variables['textColor'] = $theme->settings->textcolor;
-    }
-    if (!empty($theme->settings->linkcolor)) {
-        $variables['linkColor'] = $theme->settings->linkcolor;
-    }
-    if (!empty($theme->settings->contentbackground)) {
-        $variables['contentBackground'] = $theme->settings->contentbackground;
-    }
-    if (!empty($theme->settings->maincolor)) {
-        $variables['mainColor'] = $theme->settings->maincolor;
-    }
-    if (!empty($theme->settings->maininversecolor)) {
-        $variables['mainInverseColor'] = $theme->settings->maininversecolor;
-    }
-    if (!empty($theme->settings->secondarycolor)) {
-        $variables['secondaryColor'] = $theme->settings->secondarycolor;
-    }
-    if (!empty($theme->settings->secondaryinversecolor)) {
-        $variables['secondaryInverseColor'] = $theme->settings->secondaryinversecolor;
-    }
-    return $variables;
-}
-
-/**
- * Returns an object containing HTML for the areas affected by settings.
- *
- * Do not add  specific logic in here, child themes should be able to
- * rely on that function just by declaring settings with similar names.
- *
- * @param renderer_base $output Pass in $OUTPUT.
- * @param moodle_page $page Pass in $PAGE.
- * @return stdClass An object with the following properties:
- *      - navbarclass A CSS class to use on the navbar. By default ''.
- *      - heading HTML to use for the heading. A logo if one is selected or the default heading.
- *      - footnote HTML to use as a footnote. By default ''.
- */
-function theme_upo_get_html_for_settings(renderer_base $output, moodle_page $page) {
+function theme_upo_get_precompiled_css() {
     global $CFG;
-    $return = new stdClass;
-
-    $return->navbarclass = '';
-    if (!empty($page->theme->settings->invert)) {
-        $return->navbarclass .= ' navbar-inverse';
-    }
-
-    $site = get_site();
-    if (!empty($page->theme->settings->logo)) {
-        $logo = $page->theme->setting_file_url('logo', 'logo');
-        $return->heading = html_writer::empty_tag('img', array('src' => $logo, 'alt' => $site->fullname));
-    } else {
-        $return->heading = html_writer::tag('h1', $site->fullname);
-    }
-
-    $footerlogoalt = '&nbsp;';
-    if (!empty($page->theme->settings->footerlogoalt)) {
-        $footerlogoalt = format_string($page->theme->settings->footerlogoalt);
-    }
-
-    if (!empty($page->theme->settings->footerlogo)) {
-        $footerlogo = $page->theme->setting_file_url('footerlogo', 'footerlogo');
-        $return->logofoot = html_writer::empty_tag('img', array('src' => $footerlogo, 'alt' => $footerlogoalt));
-        if (!empty($page->theme->settings->footerlogolink)) {
-            $return->logofoot = html_writer::tag('a', $return->logofoot, array('href' => $page->theme->settings->footerlogolink, 'title' => $footerlogoalt));
-        }
-    } else {
-        $return->logofoot = html_writer::tag('h3', $footerlogoalt);
-    }
-
-    $return->footnote = '';
-    if (!empty($page->theme->settings->footnote)) {
-        $return->footnote = html_writer::tag('div', $page->theme->settings->footnote, array('class' => 'footnote text-center'));
-    }
-
-    return $return;
-}
-
-/**
- * Parses CSS before it is cached.
- *
- * This function can make alterations and replace patterns within the CSS.
- *
- * @param string $css The CSS
- * @param theme_config $theme The theme config object.
- * @return string The parsed CSS The parsed CSS.
- */
-function theme_upo_process_css($css, $theme) {
-
-    $css = theme_upo_set_fontwww($css);
-
-    // Set custom CSS.
-    if (!empty($theme->settings->customcss)) {
-        $customcss = $theme->settings->customcss;
-    } else {
-        $customcss = null;
-    }
-    $css = theme_upo_set_customcss($css, $customcss);
-
-    return $css;
+    return file_get_contents($CFG->dirroot . '/theme/upo/style/moodle.css');
 }
 
 /**
@@ -191,49 +139,14 @@ function theme_upo_process_css($css, $theme) {
  * @return bool
  */
 function theme_upo_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
-    if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'footerlogo' || $filearea === 'backgroundimage')) {
+    if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'backgroundimage')) {
         $theme = theme_config::load('upo');
+        // By default, theme files must be cache-able by both browsers and proxies.
+        if (!array_key_exists('cacheability', $options)) {
+            $options['cacheability'] = 'public';
+        }
         return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
     } else {
         send_file_not_found();
     }
-}
-
-function theme_upo_set_fontwww($css) {
-    global $CFG, $PAGE;
-    if(empty($CFG->themewww)){
-        $themewww = $CFG->wwwroot."/theme";
-    } else {
-        $themewww = $CFG->themewww;
-    }
-    $tag = '[[setting:fontwww]]';
-    
-    $theme = theme_config::load('upo');
-    if (!empty($theme->settings->awesomefont) && ($theme->settings->awesomefont == 'bootstrapcdn')) {
-     $css = str_replace($tag, '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/fonts/', $css);
-    } else if (!empty($theme->settings->awesomefont) && ($theme->settings->awesomefont == 'local')) {
-     $css = str_replace($tag, $themewww.'/upo/fonts/', $css);
-    } else {
-     $css = str_replace($tag, '', $css);
-    }
-    return $css;
-}
-
-/**
- * Adds any custom CSS to the CSS before it is cached.
- *
- * @param string $css The original CSS.
- * @param string $customcss The custom CSS to add.
- * @return string The CSS which now contains our custom CSS.
- */
-function theme_upo_set_customcss($css, $customcss) {
-    $tag = '[[setting:customcss]]';
-    $replacement = $customcss;
-    if (is_null($replacement)) {
-        $replacement = '';
-    }
-
-    $css = str_replace($tag, $replacement, $css);
-
-    return $css;
 }
