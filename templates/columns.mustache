@@ -15,11 +15,11 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_upo/frontpage
+    @template theme_upo/columns
 
     Admin time setting template.
 
-    Classic 1-3 column layout template with 4 more block regions.
+    Classic 1-3 column layout template.
 
     Context variables required for this template:
     * sitename - The name of the site
@@ -50,29 +50,16 @@
 
 <body {{{ bodyattributes }}}>
 
-<div id="page-wrapper">
+<div id="page-wrapper" class="d-print-block">
 
     {{{ output.standard_top_of_body_html }}}
 
     {{> theme_upo/navbar}}
 
-    <div id="page" class="container-fluid">
-        {{#hasbannerblocks}}
-        <div class="banner-blocks has-blocks">
-            <section data-region="blocks" class="hidden-print" aria-label="{{#str}}blocks{{/str}}">
-                {{{bannerblocks}}}
-            </section>
-        </div>
-        {{/hasbannerblocks}}
-        {{#hashomeblocks}}
-            <div class="homeblocks has-blocks">
-                <section data-region="blocks" class="hidden-print" aria-label="{{#str}}blocks{{/str}}">
-                    {{{ homeblocks }}}
-                </section>
-            </div>
-        {{/hashomeblocks}}
+    <div id="page" class="container-fluid d-print-block">
+        {{{ output.full_header }}}
 
-        <div id="page-content" class="row {{#haspreblocks}} blocks-pre {{/haspreblocks}} {{#haspostblocks}} blocks-post {{/haspostblocks}}">
+        <div id="page-content" class="row {{#haspreblocks}} blocks-pre {{/haspreblocks}} {{#haspostblocks}} blocks-post {{/haspostblocks}} d-print-block">
             <div id="region-main-box" class="region-main">
                 {{#hasregionmainsettingsmenu}}
                 <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
@@ -90,31 +77,17 @@
                 </section>
             </div>
             <div class="columnleft blockcolumn {{#haspreblocks}} has-blocks {{/haspreblocks}}">
-                <section data-region="blocks-column" class="hidden-print" aria-label="{{#str}}blocks{{/str}}">
+                <section data-region="blocks-column" class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
                     {{{ sidepreblocks }}}
                 </section>
             </div>
 
             <div class="columnright blockcolumn {{#haspostblocks}} has-blocks {{/haspostblocks}}">
-                <section data-region="blocks-column" class="hidden-print" aria-label="{{#str}}blocks{{/str}}">
+                <section data-region="blocks-column" class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
                     {{{ sidepostblocks }}}
                 </section>
             </div>
         </div>
-        {{#hashiddendock}}
-            <div class="hiddendock has-blocks">
-                <section data-region="blocks" class="hidden-print" aria-label="{{#str}}blocks{{/str}}">
-                    {{{ hiddendock }}}
-                </section>
-            </div>
-        {{/hashiddendock}}
-        {{#hasfooterblocks}}
-            <div class="footerblocks has-blocks">
-                <section data-region="blocks" class="hidden-print" aria-label="{{#str}}blocks{{/str}}">
-                    {{{ footerblocks }}}
-                </section>
-            </div>
-        {{/hasfooterblocks}}
     </div>
     {{{ output.standard_after_main_region_html }}}
     {{> theme_boost/footer }}
@@ -123,6 +96,8 @@
 </body>
 </html>
 {{#js}}
-require(['theme_boost/loader']);
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+    M.util.js_complete('theme_boost/loader');
+});
 {{/js}}
-
