@@ -33,34 +33,29 @@ $THEME->sheets = [];
 $THEME->layouts = [
     // Most backwards compatible layout without the blocks - this is the layout used by default.
     'base' => array(
-        'theme' => 'classic',
         'file' => 'columns.php',
         'regions' => array(),
     ),
     // Standard layout with blocks, this is recommended for most pages with general information.
     'standard' => array(
-        'theme' => 'classic',
         'file' => 'columns.php',
         'regions' => array('side-pre', 'side-post'),
         'defaultregion' => 'side-pre',
     ),
     // Main course page.
     'course' => array(
-        'theme' => 'classic',
         'file' => 'columns.php',
         'regions' => array('side-pre', 'side-post'),
         'defaultregion' => 'side-pre',
         'options' => array('langmenu' => true),
     ),
     'coursecategory' => array(
-        'theme' => 'classic',
         'file' => 'columns.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
     // Part of course, typical for modules - default page layout if $cm specified in require_login().
     'incourse' => array(
-        'theme' => 'classic',
         'file' => 'columns.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
@@ -74,14 +69,12 @@ $THEME->layouts = [
     ),
     // Server administration scripts.
     'admin' => array(
-        'theme' => 'classic',
         'file' => 'columns.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
     // My dashboard page.
     'mydashboard' => array(
-        'theme' => 'classic',
         'file' => 'columns.php',
         'regions' => array('side-pre', 'side-post'),
         'defaultregion' => 'side-pre',
@@ -89,7 +82,6 @@ $THEME->layouts = [
     ),
     // My public page.
     'mypublic' => array(
-        'theme' => 'classic',
         'file' => 'columns.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
@@ -144,14 +136,12 @@ $THEME->layouts = [
     ),
     // The pagelayout used for reports.
     'report' => array(
-        'theme' => 'classic',
         'file' => 'columns.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre',
     ),
     // The pagelayout used for safebrowser and securewindow.
     'secure' => array(
-        'theme' => 'classic',
         'file' => 'secure.php',
         'regions' => array('side-pre'),
         'defaultregion' => 'side-pre'
