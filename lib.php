@@ -66,9 +66,15 @@ function theme_upo_get_pre_scss($theme) {
         'linkcolor' => ['link-color'],
     ];
 
+    $defaultcolors = [
+        'brandcolor' => '#343a40',
+        'linkcolor' => '#1177d1',
+    ];
+
     // Prepend variables first.
     foreach ($configurable as $configkey => $targets) {
-        $value = isset($theme->settings->{$configkey}) ? $theme->settings->{$configkey} : null;
+        $colordefined = isset($theme->settings->{$configkey}) && !empty($theme->settings->{$configkey});
+        $value = $colordefined ? $theme->settings->{$configkey} : $defaultcolors[$configkey];
         if (empty($value)) {
             continue;
         }
