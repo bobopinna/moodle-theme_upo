@@ -1,1 +1,6 @@
-@import "../../classic/scss/classic/navbar-dark";
+$nabvar-bg-color: $primary;
+
+.navbar-bootswatch {
+    @extend .navbar-dark;
+    background-color: $nabvar-bg-color;
+}
