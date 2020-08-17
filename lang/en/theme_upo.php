@@ -50,3 +50,4 @@ $string['region-footer-right'] = 'Footer Right';
 $string['sitetitle'] = 'Site title';
 $string['privacy:metadata'] = 'The UPO theme does not store any personal data.';
 $string['adminonly'] = 'Blocks moved into the area below will only be seen by admins';
+$string['locallogin'] = 'Local Log in';
