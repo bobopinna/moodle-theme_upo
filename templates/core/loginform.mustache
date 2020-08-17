@@ -249,12 +249,16 @@
     {{#error}}
         require(['jquery'], function($) {
             $('#loginerrormessage').focus();
+            {{#hasidentityproviders}}
             $('#login').before(content);
+            {{/hasidentityproviders}}
         });
     {{/error}}
     {{^error}}
+        {{#hasidentityproviders}}
         $('#login').hide();
         $('#login').before(content);
+        {{/hasidentityproviders}}
         {{#autofocusform}}
             require(['jquery'], function($) {
                 if ($('#username').val()) {
