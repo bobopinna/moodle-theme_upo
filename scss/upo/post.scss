@@ -79,3 +79,32 @@
 .potentialidp {
     margin-bottom: .5em;
 }
+
+#page-footer .container {
+    @media (min-width: 768px) {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+
+        > div {
+            display: table-cell;
+            vertical-align: top;
+            text-align: center;
+        }
+
+        > :first-child {
+            text-align: left;
+        }
+
+        > :last-child {
+            text-align: right;
+        }
+    }
+
+    display: block;
+    text-align: center;
+}
+
+#page-mod-assign-grading #region-main {
+    overflow: visible;
+}
