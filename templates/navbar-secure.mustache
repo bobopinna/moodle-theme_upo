@@ -30,12 +30,12 @@
 }}
 <nav class="fixed-top navbar navbar-bootswatch navbar-expand moodle-has-zindex">
     {{# output.should_display_navbar_logo }}
-        <span class="logo d-none d-sm-inline">
+        <span class="logo d-sm-inline">
             <img src="{{output.get_compact_logo_url}}" alt="{{sitename}}">
         </span>
     {{/ output.should_display_navbar_logo }}
     {{^ output.should_display_navbar_logo }}
-        <span class="site-name d-none d-md-inline">{{{ sitename }}}</span>
+        <span class="site-name d-md-inline">{{{ sitename }}}</span>
     {{/ output.should_display_navbar_logo }}
 
     {{# output.secure_layout_language_menu }}
