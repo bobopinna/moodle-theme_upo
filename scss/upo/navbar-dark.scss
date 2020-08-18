@@ -3,4 +3,6 @@ $nabvar-bg-color: $primary;
 .navbar-bootswatch {
     @extend .navbar-dark;
     background-color: $nabvar-bg-color;
+
+    color: white;
 }
