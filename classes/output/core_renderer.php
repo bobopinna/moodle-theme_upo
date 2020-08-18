@@ -98,4 +98,23 @@ class core_renderer extends \core_renderer {
 
         return $result;
     }
+
+    /**
+     * Whether we should display the main logo.
+     *
+     * @param int $headinglevel The heading level we want to check against.
+     * @return bool
+     */
+    public function should_display_main_logo($headinglevel = 1) {
+
+        // Only render the logo if we're on the login page and the we have a logo.
+        $logo = $this->get_logo_url();
+        if ($headinglevel == 1 && !empty($logo)) {
+            if ($this->page->pagelayout == 'login') {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
