@@ -80,6 +80,10 @@
     margin-bottom: .5em;
 }
 
+nav.navbar .logo img {
+    max-height: 45px;
+}
+
 #page-footer .container {
     @media (min-width: 768px) {
         display: table;
