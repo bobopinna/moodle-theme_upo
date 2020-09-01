@@ -156,3 +156,21 @@ function theme_upo_pluginfile($course, $cm, $context, $filearea, $args, $forcedo
         send_file_not_found();
     }
 }
+
+/**
+ * Get the user preference for the columns show/hide function.
+ *
+ * @return string
+ */
+function theme_upo_get_columns_visibility() {
+    return get_user_preferences('theme_upo_columns', '');
+}
+
+/**
+ * Set user preferences for columns show/hide function
+ *
+ * @return void
+ */
+function theme_upo_initialize_columns_visibility() {
+    user_preference_allow_ajax_update('theme_upo_columns', PARAM_TEXT);
+}
