@@ -118,49 +118,4 @@ class core_renderer extends \core_renderer {
         return false;
     }
 
-    /**
-     * Return  hide/show columns button
-     *
-     * @return string HTML.
-     */
-    public function hideshowcolumns() {
-        global $PAGE;
-
-        theme_upo_initialize_columns_visibility();
-        $columnsvisibility = theme_upo_get_columns_visibility();
-
-        $result = '';
-        if (isloggedin()) {
-            $hidetitle = get_string('hidecolumns', 'theme_upo');
-            $showtitle = get_string('showcolumns', 'theme_upo');
-            if ($columnsvisibility == 'no') { // Columns not shown.
-                $columnsicontitle = $showtitle;
-                $faicon = 'table';
-            } else {
-                $columnsicontitle = $hidetitle;
-                $faicon = 'window-maximize';
-            }
-            $result .= \html_writer::start_tag('div',
-                array('id' => 'columnschooser', 'class' => 'columnschooser btn btn-secondary', 'title' => $columnsicontitle,
-                    'data-hidetitle' => $hidetitle, 'data-showtitle' => $showtitle));
-            $result .= \html_writer::tag('i', '', array('class' => 'fa fa-lg fa-'.$faicon, 'aria-hidden' => 'true'));
-            $result .= \html_writer::tag('span', ' '.$columnsicontitle, array('class' => 'showhideblocksdesc'));
-            $result .= \html_writer::end_tag('div');
-            $PAGE->requires->js_call_amd('theme_upo/columnschooser', 'init');
-        }
-        return $result;
-    }
-
-    /**
-     * Gets the HTML for the page heading button.
-     *
-     * @since Moodle 2.5.1 2.6
-     * @return string HTML.
-     */
-    public function page_heading_button() {
-        $result = '';
-        $result .= $this->hideshowcolumns();
-        $result .= $this->page->button;
-        return $result;
-    }
 }

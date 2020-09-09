@@ -112,3 +112,31 @@ nav.navbar .logo img {
 #page-mod-assign-grading #region-main {
     overflow: visible;
 }
+
+
+.columnshided {
+    @media (min-width: 768px) {
+        #page-content.blocks-pre .region-main,
+        #page-content.blocks-post .region-main,
+        #page-content.blocks-pre.blocks-post .region-main {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 0 1rem;
+        }
+
+        #page-content.blocks-pre .columnleft,
+        #page-content.blocks-post .columnright {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 767.98px) {
+    #columnschooser {
+        display: none;
+    }
+}
+
+#columnschooser {
+    float: right;
+}

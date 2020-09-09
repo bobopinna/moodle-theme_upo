@@ -24,12 +24,23 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$bodyattributes = $OUTPUT->body_attributes();
+$extraclasses = [];
+$columnschooser = '';
+if ($PAGE->pagelayout != 'mydashboard') {
+    $columnsvisibility = get_user_preferences('theme_upo_columns', 'yes');
+    if ($columnsvisibility == 'no') {
+        $extraclasses[] = 'columnshided';
+    }
+    $columnschooser = theme_upo_hideshow_columns();
+}
+
+$bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $blockspre = $OUTPUT->blocks('side-pre');
 $blockspost = $OUTPUT->blocks('side-post');
 
 $hassidepre = $PAGE->blocks->region_has_content('side-pre', $OUTPUT);
 $hassidepost = $PAGE->blocks->region_has_content('side-post', $OUTPUT);
+
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
@@ -38,7 +49,8 @@ $templatecontext = [
     'sidepostblocks' => $blockspost,
     'haspreblocks' => $hassidepre,
     'haspostblocks' => $hassidepost,
-    'bodyattributes' => $bodyattributes
+    'bodyattributes' => $bodyattributes,
+    'columnschooser' => $columnschooser
 ];
 
 echo $OUTPUT->render_from_template('theme_upo/columns', $templatecontext);

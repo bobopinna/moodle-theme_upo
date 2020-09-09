@@ -158,19 +158,34 @@ function theme_upo_pluginfile($course, $cm, $context, $filearea, $args, $forcedo
 }
 
 /**
- * Get the user preference for the columns show/hide function.
+ * Return  hide/show columns button
  *
- * @return string
+ * @return string HTML.
  */
-function theme_upo_get_columns_visibility() {
-    return get_user_preferences('theme_upo_columns', '');
-}
+function theme_upo_hideshow_columns() {
+    global $PAGE;
 
-/**
- * Set user preferences for columns show/hide function
- *
- * @return void
- */
-function theme_upo_initialize_columns_visibility() {
     user_preference_allow_ajax_update('theme_upo_columns', PARAM_TEXT);
+    $columnsvisibility = get_user_preferences('theme_upo_columns', 'yes');
+
+    $result = '';
+    if (isloggedin()) {
+        $hidetitle = get_string('hidecolumns', 'theme_upo');
+        $showtitle = get_string('showcolumns', 'theme_upo');
+        if ($columnsvisibility == 'no') {
+            $columnsicontitle = $showtitle;
+            $faicon = 'compress';
+        } else {
+            $columnsicontitle = $hidetitle;
+            $faicon = 'expand';
+        }
+
+        $result .= html_writer::start_tag('div',
+            array('id' => 'columnschooser', 'class' => 'columnschooser', 'title' => $columnsicontitle,
+                  'data-hidetitle' => $hidetitle, 'data-showtitle' => $showtitle));
+        $result .= html_writer::tag('i', '', array('class' => 'fa fa-lg fa-'.$faicon, 'aria-hidden' => 'true'));
+        $result .= html_writer::end_tag('div');
+        $PAGE->requires->js_call_amd('theme_upo/columnschooser', 'init');
+    }
+    return $result;
 }
