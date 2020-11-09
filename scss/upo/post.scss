@@ -138,5 +138,10 @@ nav.navbar .logo img {
 }
 
 #columnschooser {
-    float: right;
+    position: relative;
+    text-align: right;
+}
+
+.que.calculated .answer input[type="text"] {
+    width: auto;
 }
