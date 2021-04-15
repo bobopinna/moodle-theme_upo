@@ -30,9 +30,12 @@ function($) {
                     var sidePre = $('#block-region-side-pre');
                     var sidePost = $('#block-region-side-post');
                     var columnsChooserIcon = $('#columnschooser i.fa');
+                    var columnsChooserMessage = $('#columnschooser-message');
                     var body = $('body');
                     var hidestring = columnsChooser.data('hidetitle');
+                    var hidedmessage = columnsChooser.data('hidedmessage');
                     var showstring = columnsChooser.data('showtitle');
+                    var showedmessage = columnsChooser.data('showedmessage');
 
                     if ((typeof sidePre != 'undefined') || (typeof sidePost != 'undefined')) {
                         columnsChooser.click(function() {
@@ -42,12 +45,20 @@ function($) {
                                 columnsChooserIcon.addClass('fa-expand');
                                 M.util.set_user_preference('theme_upo_columns', 'yes');
                                 columnsChooser.prop('title', hidestring);
+                                columnsChooserMessage.text(showedmessage);
+                                columnsChooserMessage.removeClass('fulldisplay');
+                                columnsChooser.removeClass('btn-warning');
+                                columnsChooser.addClass('btn-light');
                             } else {
                                 body.addClass('columnshided');
                                 columnsChooserIcon.removeClass('fa-expand');
                                 columnsChooserIcon.addClass('fa-compress');
                                 M.util.set_user_preference('theme_upo_columns', 'no');
                                 columnsChooser.prop('title', showstring);
+                                columnsChooserMessage.text(hidedmessage);
+                                columnsChooserMessage.addClass('fulldisplay');
+                                columnsChooser.removeClass('btn-light');
+                                columnsChooser.addClass('btn-warning');
                             }
                         });
                     }

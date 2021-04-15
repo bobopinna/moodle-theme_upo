@@ -139,10 +139,25 @@ nav.navbar .logo img {
 
 #columnschooser {
     position: relative;
-    /*text-align: right;*/
     float: right;
+
+    #columnschooser-message {
+        display: none;
+    }
+
+    #columnschooser-message.fulldisplay {
+        display: inline;
+    }
+
+    &:hover #columnschooser-message {
+        display: inline;
+    }
 }
 
 .que.calculated .answer input[type="text"] {
     width: auto;
+}
+
+.path-course-view .completionprogress {
+    clear: both;
 }

@@ -172,18 +172,32 @@ function theme_upo_hideshow_columns() {
     if (isloggedin()) {
         $hidetitle = get_string('hidecolumns', 'theme_upo');
         $showtitle = get_string('showcolumns', 'theme_upo');
+        $hidedmessage = get_string('hidedcolumns', 'theme_upo');
+        $showedmessage = get_string('showedcolumns', 'theme_upo');
+        $faicon = '';
+        $columnsicontitle = '';
+        $columnsmessagetext = '';
+        $columnsmessageclass = '';
+        $messagemode = '';
         if ($columnsvisibility == 'no') {
             $columnsicontitle = $showtitle;
+            $columnsmessagetext = $hidedmessage;
+            $columnsmessageclass = ' btn-warning';
+            $messagemode = 'fulldisplay';
             $faicon = 'compress';
         } else {
             $columnsicontitle = $hidetitle;
+            $columnsmessagetext = $showedmessage;
             $faicon = 'expand';
+            $columnsmessageclass = ' btn-light';
         }
 
         $result .= html_writer::start_tag('div',
-            array('id' => 'columnschooser', 'class' => 'columnschooser', 'title' => $columnsicontitle,
-                  'data-hidetitle' => $hidetitle, 'data-showtitle' => $showtitle));
-        $result .= html_writer::tag('i', '', array('class' => 'fa fa-lg fa-'.$faicon, 'aria-hidden' => 'true'));
+            array('id' => 'columnschooser', 'class' => 'columnschooser btn'.$columnsmessageclass, 'title' => $columnsicontitle,
+                  'data-hidetitle' => $hidetitle, 'data-showtitle' => $showtitle,
+                  'data-hidedmessage' => $hidedmessage, 'data-showedmessage' => $showedmessage));
+        $result .= html_writer::tag('span', $columnsmessagetext, array('id' => 'columnschooser-message', 'class' => $messagemode));
+        $result .= html_writer::tag('i', '', array('class' => 'fa fa-lg fa-fw fa-'.$faicon, 'aria-hidden' => 'true'));
         $result .= html_writer::end_tag('div');
         $PAGE->requires->js_call_amd('theme_upo/columnschooser', 'init');
     }
