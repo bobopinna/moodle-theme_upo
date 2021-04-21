@@ -243,7 +243,7 @@
 {{/maintenance}}
 {{#js}}
     {{#hasidentityproviders}}
-        var content = '<a class="btn btn-secondary btn-block" href="javascript:Y.one(\'#login\').toggleView();">';
+        var content = '<a id="locallogin" class="btn btn-secondary btn-block" href="javascript:Y.one(\'#login\').toggleView();">';
             content += '{{#str}} locallogin, theme_upo {{/str}}</a>';
     {{/hasidentityproviders}}
     {{#error}}
