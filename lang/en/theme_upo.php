@@ -53,5 +53,5 @@ $string['adminonly'] = 'Blocks moved into the area below will only be seen by ad
 $string['locallogin'] = 'Local Log in';
 $string['hidecolumns'] = 'Hide side columns';
 $string['showcolumns'] = 'Show side columns';
-$string['hidedcolumns'] = 'Side columns are hided. Click here to show';
+$string['hidedcolumns'] = 'Side columns are hidden. Click here to show';
 $string['showedcolumns'] = 'Gain space for contents. Hide side columns';
